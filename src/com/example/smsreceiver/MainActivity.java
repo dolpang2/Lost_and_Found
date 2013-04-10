@@ -20,7 +20,7 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
-	/* Notification Bulider는 API 11부터라 호환되는 library를 써야함... PAINFUL ㅡㅡ 
+	/* Notification Bulider는 API 11부터라 호환되는 library를 써야함... PAINFUL
 	public void createNotification(long when,String data){
 		String notificationContent ="Notification Content Click Here to go more details";
 		String notificationTitle ="Title";

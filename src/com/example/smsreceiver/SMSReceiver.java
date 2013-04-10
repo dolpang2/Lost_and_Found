@@ -8,12 +8,11 @@ import android.telephony.SmsMessage;
 import android.widget.Toast;
 
 public class SMSReceiver extends BroadcastReceiver {
-	public static final String NOTIFICATION_DATA = "NOTIFICATION_DATA";
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		Bundle extras = intent.getExtras();
-		
+
 		if (extras != null) {
 			Object[] pdus = (Object[]) extras.get("pdus");
 			SmsMessage[] messages = new SmsMessage[pdus.length];
@@ -26,13 +25,12 @@ public class SMSReceiver extends BroadcastReceiver {
 				String msg = message.getMessageBody();
 				// String from = message.getOriginatingAddress();
 				if (msg.startsWith("@")) {
-					Toast.makeText(context, "Special Message!", Toast.LENGTH_SHORT).show();
+					Toast.makeText(context, "special opcode detected", Toast.LENGTH_SHORT).show();
 					Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
 				} else {
-					Toast.makeText(context, "usual message", Toast.LENGTH_LONG).show();
+					Toast.makeText(context, "usual message", Toast.LENGTH_SHORT).show();
 				}
 			}
 		}
 	}
-
 }

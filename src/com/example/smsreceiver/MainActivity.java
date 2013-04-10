@@ -1,17 +1,7 @@
 package com.example.smsreceiver;
 
 import android.app.Activity;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.NotificationCompat;
 import android.view.Menu;
 
 public class MainActivity extends Activity {
@@ -30,7 +20,7 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
-	/* Notification Bulider는 API 11부터라 호환되는 library를 써야함... PAINFUL ㅡㅡ */
+	/* Notification Bulider는 API 11부터라 호환되는 library를 써야함... PAINFUL ㅡㅡ 
 	public void createNotification(long when,String data){
 		String notificationContent ="Notification Content Click Here to go more details";
 		String notificationTitle ="Title";
@@ -63,5 +53,5 @@ public class MainActivity extends Activity {
 
 		notificationManager.notify((int) when, notification);
 	}
-
+	*/
 }

@@ -4,18 +4,47 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <LinearLayout
+    <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" 
-        android:orientation="horizontal">
-            <TextView 
+        android:layout_height="wrap_content" >
+
+        <TableRow>
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/setting_siren"/>
-            <CheckBox 
-                android:layout_height="wrap_content"
+                android:text="@string/setting_siren" />
+
+            <CheckBox
+                android:id="@+id/sirenCheck"
                 android:layout_width="wrap_content"
-                android:id="@+id/sirenCheck"/>
-    </LinearLayout>
-	
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/setting_gps" />
+
+            <CheckBox
+                android:id="@+id/gpsCheck"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableRow>
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/setting_smsShoot" />
+
+            <CheckBox
+                android:id="@+id/smsShootCheck"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableRow>
+    </TableLayout>
+
 </LinearLayout>

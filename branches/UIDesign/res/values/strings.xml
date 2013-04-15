@@ -12,5 +12,11 @@
     <string name="setting_siren">경고음 출력 사용</string>
     <string name="setting_gps">위치 추적 사용</string>
     <string name="setting_smsShoot">전면 카메라 사용</string>
+    <string name="setting_phoneLock">휴대폰 잠금 사용</string>
+    <string name="setting_failShoot">잠금해제 실패 시 전면촬영</string>
+    <string name="setting_contactBackup">주소록 백업 사용</string>
+    <string name="setting_warningMsg">경고음 출력 메시지 설정</string>
+    <string name="setting_lockMessage">휴대폰 잠금시 출력될 메시지 설정</string>
+    <string name="setting_saveSetting">설정 완료</string>
 
 </resources>

@@ -8,5 +8,11 @@
     <string name="changeEmail">등록된 이메일 변경</string>
     <string name="changePassword">비밀번호 변경</string>
     <string name="support">도움말</string>
-
+    <string name="useSiren">경고음 출력 사용</string>
+    <string name="useGPS">위치 추적 사용</string>
+    <string name="useFrontCamera">전면 카메라 사용</string>
+    <string name="useLockScreen">휴대폰 잠금 사용</string>
+    <string name="useCameraShot">잠금해제 실패시 전면 촬영</string>
+    <string name="useContactBackup">주소록 백업 사용</string
+>
 </resources>

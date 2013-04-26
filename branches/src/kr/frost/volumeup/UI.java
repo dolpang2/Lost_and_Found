@@ -5,7 +5,7 @@
  * ばばばばばば
  * 2013/04/27 PM 3:17 by Frost, 悦汽 訊 鎧亜 戚獣娃拭 戚訓憎聖...?
  */
-	
+
 package kr.frost.volumeup;
 
 import android.media.AudioManager;
@@ -28,7 +28,7 @@ public class UI extends Activity {
 
 	MediaPlayer mPlayer;
 	AudioManager aManager;
-	
+
 	private int maxVol = 0;
 	private int currVol = 0;
 
@@ -49,6 +49,8 @@ public class UI extends Activity {
 
 		bar_vol.setMax(maxVol);
 		bar_vol.setProgress(currVol);
+		
+		text_vol.setText("Volume : " + currVol);
 
 		mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 		mPlayer.setLooping(true);

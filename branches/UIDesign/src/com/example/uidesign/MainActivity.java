@@ -10,6 +10,8 @@ import android.widget.Button;
 public class MainActivity extends Activity {
 	public Button settingButton;
 	public Button changeEmailButton;
+	public Button chagnePasswordButton;
+	public Button supportButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -17,9 +19,13 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		settingButton = (Button)findViewById(R.id.settingButton);
 		changeEmailButton = (Button)findViewById(R.id.changeEmailButton);
+		chagnePasswordButton = (Button)findViewById(R.id.changePasswordButton);
+		supportButton = (Button)findViewById(R.id.supportButton);
 
 		findViewById(R.id.settingButton).setOnClickListener(mClickListener);
 		findViewById(R.id.changeEmailButton).setOnClickListener(mClickListener);
+		findViewById(R.id.changePasswordButton).setOnClickListener(mClickListener);
+		findViewById(R.id.supportButton).setOnClickListener(mClickListener);
 	}
 
 	Button.OnClickListener mClickListener = new View.OnClickListener() {
@@ -44,6 +50,26 @@ public class MainActivity extends Activity {
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
 						Intent intent = new Intent(MainActivity.this, EmailChangeActivity.class);
+						startActivity(intent);
+					}
+				});
+				break;
+			case R.id.changePasswordButton:
+				chagnePasswordButton.setOnClickListener(new Button.OnClickListener() {
+					@Override 
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						Intent intent = new Intent(MainActivity.this, PasswordChangeActivity.class);
+						startActivity(intent);
+					}
+				});
+				break;
+			case R.id.supportButton:
+				supportButton.setOnClickListener(new Button.OnClickListener() {
+					@Override 
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						Intent intent = new Intent(MainActivity.this, SupportActivity.class);
 						startActivity(intent);
 					}
 				});

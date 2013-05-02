@@ -9,26 +9,28 @@ import android.widget.Button;
 
 public class MainActivity extends Activity {
 	public Button settingButton;
+	public Button changeEmailButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
 		settingButton = (Button)findViewById(R.id.settingButton);
+		changeEmailButton = (Button)findViewById(R.id.changeEmailButton);
 
 		findViewById(R.id.settingButton).setOnClickListener(mClickListener);
+		findViewById(R.id.changeEmailButton).setOnClickListener(mClickListener);
 	}
 
 	Button.OnClickListener mClickListener = new View.OnClickListener() {
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
-			
+
 			switch (v.getId()) {
 			case R.id.settingButton:
 				settingButton.setOnClickListener(new Button.OnClickListener() {
-					@Override
+					@Override 
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
 						Intent intent = new Intent(MainActivity.this, SettingActivity.class);
@@ -36,8 +38,15 @@ public class MainActivity extends Activity {
 					}
 				});
 				break;
-
-			default:
+			case R.id.changeEmailButton:
+				changeEmailButton.setOnClickListener(new Button.OnClickListener() {
+					@Override 
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						Intent intent = new Intent(MainActivity.this, EmailChangeActivity.class);
+						startActivity(intent);
+					}
+				});
 				break;
 			}
 

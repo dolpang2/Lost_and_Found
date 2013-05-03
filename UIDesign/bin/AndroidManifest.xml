@@ -22,9 +22,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity 
+        <activity
             android:name="com.example.uidesign.SettingActivity"
-            android:label="@string/setting_lable">
+            android:label="@string/setting_lable" >
+        </activity>
+        <activity
+            android:name="com.example.uidesign.StartUpActivity"
+            android:label="@string/setting_lable" >
+        </activity>
+        <activity
+            android:name="com.example.uidesign.EmailChangeActivity"
+            android:label="@string/emailchange_lable" >
+        </activity>
+        <activity
+            android:name="com.example.uidesign.PasswordChangeActivity"
+            android:label="@string/passwordchange_lable" >
+        </activity>
+        <activity
+            android:name="com.example.uidesign.SupportActivity"
+            android:label="@string/passwordchange_lable" >
         </activity>
     </application>
 

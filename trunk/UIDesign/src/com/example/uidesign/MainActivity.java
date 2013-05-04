@@ -15,7 +15,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		settingButton = (Button)findViewById(R.id.settingButton);
+		settingButton = (Button) findViewById(R.id.settingButton);
 
 		findViewById(R.id.settingButton).setOnClickListener(mClickListener);
 	}
@@ -24,7 +24,7 @@ public class MainActivity extends Activity {
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
-			
+
 			switch (v.getId()) {
 			case R.id.settingButton:
 				settingButton.setOnClickListener(new Button.OnClickListener() {

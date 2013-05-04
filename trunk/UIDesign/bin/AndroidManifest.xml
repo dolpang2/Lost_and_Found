@@ -22,9 +22,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity 
+        <activity
             android:name="com.example.uidesign.SettingActivity"
-            android:label="@string/setting_lable">
+            android:label="@string/setting_lable" >
+        </activity>
+        <activity
+            android:name="com.example.uidesign.SignupActivity"
+            android:label="@string/title_activity_signup" >
         </activity>
     </application>
 

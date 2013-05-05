@@ -18,12 +18,6 @@
     <string name="setting_warningMsg">경고음 출력 메시지 설정</string>
     <string name="setting_lockMessage">휴대폰 잠금시 출력될 메시지 설정</string>
     <string name="setting_saveSetting">설정 완료</string>
-    <string name="startup_lable">StartUp</string>
-    <string name="startup_agreement">개인정보 저장 관련 약관</string>
-    <string name="startup_agree">동의</string>
-    <string name="startup_password">비밀번호</string>
-    <string name="startup_personinfo">생년월일</string>
-    <string name="startup_email">이메일 주소</string>
     <string name="emailchange_lable">Email Change</string>
     <string name="emailchange_old">현재 이메일을 입력하세요</string>
     <string name="emailchange_new">변경할 이메일을 입력하세요</string>
@@ -32,5 +26,15 @@
     <string name="passwordchange_old">현재 비밀번호를 입력하세요</string>
     <string name="passwordchange_new">변경할 비밀번호를 입력하세요</string>
     <string name="passwordchange_finish">변경 확인</string>
+    <string name="title_activity_signup">회원가입</string>
+    <string name="signup_agreement_title">개인정보 저장 관련 약관</string>
+    <string name="signup_agreement">먹는건가요? 우걱우걱</string>
+    <string name="signup_agreement_check">동의</string>
+    <string name="signup_password">비밀번호(숫자 4자리)</string>
+    <string name="signup_password_hint">4자리의 숫자를 입력해주세요</string>
+    <string name="signup_birth">생년월일</string>
+    <string name="signup_mail">이메일 주소</string>
+    <string name="signup_mail_hint">이메일 형식에 맞춰 입력해주세요</string>
+    <string name="signup_complete">가입</string>
 
 </resources>

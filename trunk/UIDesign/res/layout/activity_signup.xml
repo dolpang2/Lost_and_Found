@@ -90,6 +90,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:maxLength="60"
             android:hint="@string/signup_mail_hint"
             android:inputType="textEmailAddress" />
     </LinearLayout>

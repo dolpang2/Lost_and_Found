@@ -32,16 +32,16 @@ public class LocalDBAdapter {
 	private SQLiteDatabase mDb;
 
 	private static final String TABLE_MEMBER_CREATE_QUERY = "create table if not exists " + TABLE_MEMBER_NAME
-			+ " (" + KEY_MEMBER_BIRTH + " date not null, " + KEY_MEMBER_MAIL + " text not null, "
+			+ " (" + KEY_MEMBER_BIRTH + " date not null, " + KEY_MEMBER_MAIL + " text primary key not null, "
 			+ KEY_MEMBER_PASS + " text not null);";
 
 	private static final String TABLE_OPTION_CREATE_QUERY = "create table if not exists " + TABLE_OPTION_NAME
 			+ " (" + KEY_OPTION_USE_SIREN + " bool not null, " + KEY_OPTION_USE_GPS + " bool not null, "
 			+ KEY_OPTION_USE_CAMERA + " bool not null, " + KEY_OPTION_USE_LOCK + " bool not null, "
 			+ KEY_OPTION_USE_LOCKFAIL + " bool not null, " + KEY_OPTION_USE_BACKUP + " bool not null, "
-			+ KEY_OPTION_TTS_MESSAGE + " text not null);";
+			+ KEY_OPTION_TTS_MESSAGE + " text primary key not null);";
 
-	private static final int DATABASE_VERSION = 1;
+	private static final int DATABASE_VERSION = 2;
 
 	private final Context mCtx;
 
@@ -83,12 +83,9 @@ public class LocalDBAdapter {
 		mDbHelper.close();
 	}
 
-	public long createMember(int year, int month, int date, String mail, String pass) throws SQLException {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-		Date birth = new Date();
-
+	public long createMember(String birth, String mail, String pass) throws SQLException {
 		ContentValues row = new ContentValues();
-		row.put(KEY_MEMBER_BIRTH, dateFormat.format(birth));
+		row.put(KEY_MEMBER_BIRTH, birth);
 		row.put(KEY_MEMBER_MAIL, mail);
 		row.put(KEY_MEMBER_PASS, pass);
 
@@ -96,12 +93,12 @@ public class LocalDBAdapter {
 		return rowID;
 	}
 
-	public int deleteMember() throws SQLException {
+	public int deleteAllMember() throws SQLException {
 		int affectedRow = mDb.delete(TABLE_MEMBER_NAME, null, null);
 		return affectedRow;
 	}
 
-	public Cursor selectMember() throws SQLException {
+	public Cursor selectAllMember() throws SQLException {
 		Cursor cursor;
 		cursor = mDb.query(TABLE_MEMBER_NAME, new String[] { KEY_MEMBER_BIRTH, KEY_MEMBER_MAIL,
 				KEY_MEMBER_PASS }, null, null, null, null, null);

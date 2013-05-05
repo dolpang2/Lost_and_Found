@@ -31,6 +31,7 @@ public class SirenActivity extends Activity {
 		mPlayer = MediaPlayer.create(SirenActivity.this, R.raw.siren);
 		
 		aManager = (AudioManager) getSystemService(AUDIO_SERVICE);
+		
 		maxVol = aManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
 		aManager.setStreamVolume(AudioManager.STREAM_MUSIC, maxVol, AudioManager.FLAG_PLAY_SOUND);
 		

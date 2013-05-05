@@ -16,11 +16,6 @@
         <activity
             android:name="com.example.uidesign.MainActivity"
             android:label="@string/main_lable" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="com.example.uidesign.SettingActivity"
@@ -29,6 +24,11 @@
         <activity
             android:name="com.example.uidesign.SignupActivity"
             android:label="@string/title_activity_signup" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

@@ -46,6 +46,7 @@
             android:id="@+id/agreeCheck"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:text="@string/signup_agreement_check" />
 
         <TextView
@@ -59,7 +60,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="number" >
+            android:inputType="number"
+            android:maxLength="4"
+            android:password="true" >
 
             <requestFocus />
         </EditText>
@@ -73,7 +76,8 @@
         <DatePicker
             android:id="@+id/birthPicker"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="7dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -86,6 +90,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:hint="@string/signup_mail_hint"
             android:inputType="textEmailAddress" />
     </LinearLayout>
 
@@ -101,4 +106,5 @@
             android:layout_gravity="bottom|right"
             android:text="@string/signup_complete" />
     </LinearLayout>
+
 </LinearLayout>

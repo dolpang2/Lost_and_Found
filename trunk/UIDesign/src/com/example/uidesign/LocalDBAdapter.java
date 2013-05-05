@@ -83,12 +83,12 @@ public class LocalDBAdapter {
 		mDbHelper.close();
 	}
 
-	public long createMember(int year, int month, int date, String mail, String pass) {
+	public long createMember(int year, int month, int date, String mail, String pass) throws SQLException {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-		Date birth = new Date(); 
-		
+		Date birth = new Date();
+
 		ContentValues row = new ContentValues();
-		row.put(KEY_MEMBER_BIRTH, dateFormat.format(birth)); 
+		row.put(KEY_MEMBER_BIRTH, dateFormat.format(birth));
 		row.put(KEY_MEMBER_MAIL, mail);
 		row.put(KEY_MEMBER_PASS, pass);
 
@@ -96,16 +96,15 @@ public class LocalDBAdapter {
 		return rowID;
 	}
 
-	public int deleteMember() {
+	public int deleteMember() throws SQLException {
 		int affectedRow = mDb.delete(TABLE_MEMBER_NAME, null, null);
 		return affectedRow;
 	}
 
-
-	public Cursor selectMember(long rowId) throws SQLException {
+	public Cursor selectMember() throws SQLException {
 		Cursor cursor;
-		cursor = mDb.query(TABLE_MEMBER_NAME, new String[] { KEY_MEMBER_BIRTH,
-				KEY_MEMBER_MAIL, KEY_MEMBER_PASS }, null, null, null, null, null);
+		cursor = mDb.query(TABLE_MEMBER_NAME, new String[] { KEY_MEMBER_BIRTH, KEY_MEMBER_MAIL,
+				KEY_MEMBER_PASS }, null, null, null, null, null);
 		cursor.moveToFirst();
 		return cursor;
 	}

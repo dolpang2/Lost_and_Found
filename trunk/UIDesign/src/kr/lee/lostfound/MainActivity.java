@@ -1,4 +1,4 @@
-package com.example.uidesign;
+package kr.lee.lostfound;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -17,10 +17,10 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		settingButton = (Button)findViewById(R.id.settingButton);
-		changeEmailButton = (Button)findViewById(R.id.changeEmailButton);
-		chagnePasswordButton = (Button)findViewById(R.id.changePasswordButton);
-		supportButton = (Button)findViewById(R.id.supportButton);
+		settingButton = (Button) findViewById(R.id.settingButton);
+		changeEmailButton = (Button) findViewById(R.id.changeEmailButton);
+		chagnePasswordButton = (Button) findViewById(R.id.changePasswordButton);
+		supportButton = (Button) findViewById(R.id.supportButton);
 
 		findViewById(R.id.settingButton).setOnClickListener(mClickListener);
 		findViewById(R.id.changeEmailButton).setOnClickListener(mClickListener);
@@ -36,7 +36,7 @@ public class MainActivity extends Activity {
 			switch (v.getId()) {
 			case R.id.settingButton:
 				settingButton.setOnClickListener(new Button.OnClickListener() {
-					@Override 
+					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
 						Intent intent = new Intent(MainActivity.this, SettingActivity.class);
@@ -46,7 +46,7 @@ public class MainActivity extends Activity {
 				break;
 			case R.id.changeEmailButton:
 				changeEmailButton.setOnClickListener(new Button.OnClickListener() {
-					@Override 
+					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
 						Intent intent = new Intent(MainActivity.this, EmailChangeActivity.class);
@@ -56,7 +56,7 @@ public class MainActivity extends Activity {
 				break;
 			case R.id.changePasswordButton:
 				chagnePasswordButton.setOnClickListener(new Button.OnClickListener() {
-					@Override 
+					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
 						Intent intent = new Intent(MainActivity.this, PasswordChangeActivity.class);
@@ -66,7 +66,7 @@ public class MainActivity extends Activity {
 				break;
 			case R.id.supportButton:
 				supportButton.setOnClickListener(new Button.OnClickListener() {
-					@Override 
+					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
 						Intent intent = new Intent(MainActivity.this, SupportActivity.class);

@@ -1,13 +1,15 @@
-package com.example.uidesign;
+package kr.lee.lostfound;
 
 import android.app.Activity;
 import android.os.Bundle;
 
-public class SupportActivity extends Activity {
+public class StartUpActivity extends Activity {
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_support);
+		setContentView(R.layout.activity_startup);
 	}
+
 }

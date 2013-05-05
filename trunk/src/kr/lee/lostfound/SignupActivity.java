@@ -26,7 +26,6 @@ import android.database.SQLException;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -55,7 +54,7 @@ public class SignupActivity extends Activity {
 
 		mDBHelper = new LocalDBAdapter(this);
 		mDBHelper.open(); // DB Open
-		
+
 		Cursor localDBResult = mDBHelper.selectAllMember();
 		alreadyExist = localDBResult.getCount();
 
@@ -128,6 +127,7 @@ public class SignupActivity extends Activity {
 			}
 		});
 	}
+
 	/*
 	 * Unused Method - isPositiveInteger
 	 * 주어진 String에 대해 그 String이 양수의 숫자인지 확인하는 함수.

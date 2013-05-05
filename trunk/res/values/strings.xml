@@ -26,7 +26,7 @@
     <string name="passwordchange_old">현재 비밀번호를 입력하세요</string>
     <string name="passwordchange_new">변경할 비밀번호를 입력하세요</string>
     <string name="passwordchange_finish">변경 확인</string>
-    <string name="title_activity_signup">회원가입</string>
+    <string name="signup_lable">Sign Up</string>
     <string name="signup_agreement_title">개인정보 저장 관련 약관</string>
     <string name="signup_agreement">먹는건가요? 우걱우걱</string>
     <string name="signup_agreement_check">동의</string>

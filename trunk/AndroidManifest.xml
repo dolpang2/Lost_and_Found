@@ -35,7 +35,9 @@
             android:name="kr.lee.lostfound.SupportActivity"
             android:label="@string/passwordchange_lable" >
         </activity>
-        <activity android:name="kr.lee.lostfound.SignupActivity" >
+        <activity
+            android:name="kr.lee.lostfound.SignupActivity"
+            android:label="@string/signup_lable" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

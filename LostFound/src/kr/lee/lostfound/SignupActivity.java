@@ -211,6 +211,7 @@ public class SignupActivity extends Activity {
 						}).show();
 				break;
 			case 0:
+				mDBHelper.createOption(); // 옵션 테이블의 정보를 기입해주자 ^^ 완벽한 로컬 DB 구현됨.
 				Toast.makeText(SignupActivity.this, "회원 가입이 정상적으로 처리되었습니다.", Toast.LENGTH_LONG).show();
 				Intent mainIntent = new Intent(SignupActivity.this, MainActivity.class);
 				signupDialog.dismiss();

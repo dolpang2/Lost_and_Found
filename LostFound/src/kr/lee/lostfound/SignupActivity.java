@@ -68,7 +68,7 @@ public class SignupActivity extends Activity {
 		case 0:
 			break;
 		default:
-			mDBHelper.deleteAllMember(); // ���� DB Reroll
+			mDBHelper.deleteAllMember(); // Local DB Reroll
 			Toast.makeText(SignupActivity.this, "Local DB가 손상되었습니다.", Toast.LENGTH_SHORT).show();
 			Toast.makeText(SignupActivity.this, "Local DB를 초기화합니다.", Toast.LENGTH_SHORT).show();
 			break;
@@ -181,8 +181,7 @@ public class SignupActivity extends Activity {
 			switch (result) {
 			case 6:
 				mDBHelper.deleteAllMember(); // Local DB Delete
-				dialogBuilder.setTitle("가입 실패")
-						.setMessage("로컬 DB 저장에 실패하였습니다. 개발자에게 문의바랍니다.")
+				dialogBuilder.setTitle("가입 실패").setMessage("로컬 DB 저장에 실패하였습니다. 개발자에게 문의바랍니다.")
 						.setIcon(android.R.drawable.ic_dialog_alert)
 						.setPositiveButton("확인", new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int which) {
@@ -191,8 +190,7 @@ public class SignupActivity extends Activity {
 				break;
 			case 5:
 				mDBHelper.deleteAllMember(); // Local DB Delete
-				dialogBuilder.setTitle("가입 실패")
-						.setMessage("웹 서버와 통신에 실패하였습니다. 인터넷 연결상태를 확인해주세요.")
+				dialogBuilder.setTitle("가입 실패").setMessage("웹 서버와 통신에 실패하였습니다. 인터넷 연결상태를 확인해주세요.")
 						.setIcon(android.R.drawable.ic_dialog_alert)
 						.setPositiveButton("확인", new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int which) {
@@ -201,8 +199,7 @@ public class SignupActivity extends Activity {
 				break;
 			case 4:
 				mDBHelper.deleteAllMember(); // Local DB Delete
-				dialogBuilder.setTitle("가입 실패")
-						.setMessage("XML Parsing에 실패하였습니다. 개발자에게 문의바랍니다.")
+				dialogBuilder.setTitle("가입 실패").setMessage("XML Parsing에 실패하였습니다. 개발자에게 문의바랍니다.")
 						.setIcon(android.R.drawable.ic_dialog_alert)
 						.setPositiveButton("확인", new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int which) {
@@ -211,8 +208,7 @@ public class SignupActivity extends Activity {
 				break;
 			case 3:
 				mDBHelper.deleteAllMember(); // Local DB Delete
-				dialogBuilder.setTitle("가입 실패")
-						.setMessage("웹 DB 접근이 거부되었습니다. 개발자에게 문의바랍니다.")
+				dialogBuilder.setTitle("가입 실패").setMessage("웹 DB 접근이 거부되었습니다. 개발자에게 문의바랍니다.")
 						.setIcon(android.R.drawable.ic_dialog_alert)
 						.setPositiveButton("확인", new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int which) {
@@ -221,8 +217,7 @@ public class SignupActivity extends Activity {
 				break;
 			case 2:
 				mDBHelper.deleteAllMember(); // Local DB Delete
-				dialogBuilder.setTitle("가입 실패")
-						.setMessage("웹 DB Query문에 문법 오류가 있습니다. 개발자에게 문의바랍니다.")
+				dialogBuilder.setTitle("가입 실패").setMessage("웹 DB Query문에 문법 오류가 있습니다. 개발자에게 문의바랍니다.")
 						.setIcon(android.R.drawable.ic_dialog_alert)
 						.setPositiveButton("확인", new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int which) {
@@ -231,8 +226,7 @@ public class SignupActivity extends Activity {
 				break;
 			case 1:
 				mDBHelper.deleteAllMember(); // Local DB Delete
-				dialogBuilder.setTitle("가입 실패")
-						.setMessage("이미 가입된 메일주소입니다. 다른 메일 주소를 입력해주세요.")
+				dialogBuilder.setTitle("가입 실패").setMessage("이미 가입된 메일주소입니다. 다른 메일 주소를 입력해주세요.")
 						.setIcon(android.R.drawable.ic_dialog_alert)
 						.setPositiveButton("확인", new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int which) {
@@ -240,8 +234,7 @@ public class SignupActivity extends Activity {
 						}).show();
 				break;
 			case 0:
-				Toast.makeText(SignupActivity.this, "회원 가입이 정상적으로 처리되었습니다.", Toast.LENGTH_LONG)
-						.show();
+				Toast.makeText(SignupActivity.this, "회원 가입이 정상적으로 처리되었습니다.", Toast.LENGTH_LONG).show();
 				Intent mainIntent = new Intent(SignupActivity.this, MainActivity.class);
 				signupDialog.dismiss();
 				startActivity(mainIntent);

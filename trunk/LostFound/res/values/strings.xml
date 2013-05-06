@@ -37,7 +37,7 @@
     <string name="signup_mail">이메일 주소</string>
     <string name="signup_mail_hint">이메일 형식에 맞춰 입력해주세요</string>
     <string name="signup_complete">가입</string>
-    <string name="title_activity_startup">StartupActivity</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_startup">Lost+Found</string>
+    <string name="support_lable">Support</string>
 
 </resources>

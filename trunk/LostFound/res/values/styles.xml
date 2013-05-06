@@ -3,10 +3,6 @@
 
     <color name="pitch_black">#202020</color>
 
-    <style name="Theme.MyTheme" parent="@android:style/Theme.Black">
-        <item name="android:background">@color/pitch_black</item>
-        <item name="android:windowBackground">@color/pitch_black</item>
-        <item name="android:colorBackground">@color/pitch_black</item>
+    <style name="Theme.MyTheme" parent="@android:style/Theme">
     </style>
-
 </resources>

@@ -21,7 +21,6 @@ import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.SQLException;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -50,6 +49,9 @@ public class SignupActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_signup);
+
+		mDBHelper = new LocalDBAdapter(this);
+		mDBHelper.open(); // DB Open
 
 		dialogBuilder = new AlertDialog.Builder(SignupActivity.this);
 
@@ -282,20 +284,26 @@ public class SignupActivity extends Activity {
 				case -2:
 					// MYSQL Access Denied
 					result = 3;
+					break;
 				case -1:
 					// Insert Failed but not catched by SQLException
 					result = 2;
+					break;
 				case 1064:
 					// Syntax Error
 					result = 2;
+					break;
 				case 1292:
 					// Data Truncation Error(Input NULL...)
 					result = 2;
+					break;
 				case 1062:
 					// E-Mail Address Duplicate!!!!!!!!!!!!!
 					result = 1;
+					break;
 				case 0:
 					result = 0;
+					break;
 				}
 			} catch (Exception e) {
 				Log.e("SignupActivity - ParseXML", e.getMessage());

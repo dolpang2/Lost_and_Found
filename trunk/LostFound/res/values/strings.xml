@@ -29,7 +29,7 @@
     <string name="passwordchange_finish">변경 확인</string>
     <string name="signup_lable">Sign Up</string>
     <string name="signup_agreement_title">개인정보 저장 관련 약관</string>
-    <string name="signup_agreement">먹는건가요? 우걱우걱</string>
+    <string name="signup_agreement">약관 정보가 여기에 들어갑니다.</string>
     <string name="signup_agreement_check">동의</string>
     <string name="signup_password">비밀번호(숫자 4자리)</string>
     <string name="signup_password_hint">4자리의 숫자를 입력해주세요</string>
@@ -39,5 +39,7 @@
     <string name="signup_complete">가입</string>
     <string name="title_activity_startup">Lost+Found</string>
     <string name="support_lable">Support</string>
+    <string name="siren_message1">이 핸드폰은 주인이 애타게 기다리고 있는\n분실 폰입니다.</string>
+    <string name="siren_message2">아래의 번호로 꼭 전화해주세요~</string>
 
 </resources>

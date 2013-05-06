@@ -2,110 +2,140 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin" >
 
-    <TableLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:orientation="vertical" >
 
-        <TableRow>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dip"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="@string/setting_siren" />
 
             <CheckBox
                 android:id="@+id/sirenCheck"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-        </TableRow>
+        </LinearLayout>
 
-        <TableRow>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dip"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="@string/setting_gps" />
 
             <CheckBox
                 android:id="@+id/gpsCheck"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-        </TableRow>
+        </LinearLayout>
 
-        <TableRow>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dip"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="@string/setting_smsShoot" />
 
             <CheckBox
                 android:id="@+id/smsShootCheck"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-        </TableRow>
+        </LinearLayout>
 
-        <TableRow>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dip"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="@string/setting_phoneLock" />
 
             <CheckBox
                 android:id="@+id/phoneLockCheck"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-        </TableRow>
+        </LinearLayout>
 
-        <TableRow>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dip"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="@string/setting_failShoot" />
 
             <CheckBox
                 android:id="@+id/failShootCheck"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-        </TableRow>
+        </LinearLayout>
 
-        <TableRow>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dip"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="@string/setting_contactBackup" />
 
             <CheckBox
                 android:id="@+id/contactCheck"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-        </TableRow>
-    </TableLayout>
+        </LinearLayout>
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/setWarningMessage"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/setting_warningMsg" />
+        android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/setLockMessage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/setting_lockMessage" />
+        <Button
+            android:id="@+id/setWarningMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/setting_warningMsg" />
 
-    <Button
-        android:id="@+id/setSaveSetting"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/setting_saveSetting" />
+        <Button
+            android:id="@+id/setLockMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/setting_lockMessage" />
+
+        <Button
+            android:id="@+id/setSaveSetting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/setting_saveSetting" />
+    </LinearLayout>
 
 </LinearLayout>

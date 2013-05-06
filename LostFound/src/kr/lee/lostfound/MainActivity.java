@@ -2,16 +2,21 @@ package kr.lee.lostfound;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	public Button settingButton;
 	public Button changeEmailButton;
 	public Button chagnePasswordButton;
 	public Button supportButton;
+
+	private LocalDBAdapter mDBHelper;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +61,30 @@ public class MainActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		super.onCreateOptionsMenu(menu);
+
+		menu.add(0, 0, Menu.NONE, "Debug - Delete All Database").setIcon(android.R.drawable.ic_menu_add);
 		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		super.onOptionsItemSelected(item);
+
+		switch (item.getItemId()) {
+		case 0:
+
+			mDBHelper = new LocalDBAdapter(this);
+			mDBHelper.open(); // DB Open
+			mDBHelper.deleteAllMember(); // Local DB Reroll
+
+			Toast.makeText(this, "모든 로컬 데이터베이스가 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "회원가입 테스트 용도로만 사용하세요!!", Toast.LENGTH_SHORT).show();
+			finish();
+			return true;
+		}
+
+		return false;
 	}
 
 }

@@ -35,7 +35,7 @@
         </activity>
         <activity
             android:name="kr.lee.lostfound.SupportActivity"
-            android:label="@string/passwordchange_lable" >
+            android:label="@string/support_lable" >
         </activity>
         <activity
             android:name="kr.lee.lostfound.SignupActivity"
@@ -50,6 +50,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver android:name="SMSReceiver" >
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+        <activity android:name="kr.lee.lostfound.SirenActivity"></activity>
     </application>
 
 </manifest>

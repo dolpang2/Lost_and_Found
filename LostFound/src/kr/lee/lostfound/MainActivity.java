@@ -17,6 +17,7 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
 		settingButton = (Button) findViewById(R.id.settingButton);
 		changeEmailButton = (Button) findViewById(R.id.changeEmailButton);
 		chagnePasswordButton = (Button) findViewById(R.id.changePasswordButton);
@@ -31,48 +32,22 @@ public class MainActivity extends Activity {
 	Button.OnClickListener mClickListener = new View.OnClickListener() {
 		@Override
 		public void onClick(View v) {
-			// TODO Auto-generated method stub
-
 			switch (v.getId()) {
 			case R.id.settingButton:
-				settingButton.setOnClickListener(new Button.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						// TODO Auto-generated method stub
-						Intent intent = new Intent(MainActivity.this, SettingActivity.class);
-						startActivity(intent);
-					}
-				});
+				Intent settingIntent = new Intent(MainActivity.this, SettingActivity.class);
+				startActivity(settingIntent);
 				break;
 			case R.id.changeEmailButton:
-				changeEmailButton.setOnClickListener(new Button.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						// TODO Auto-generated method stub
-						Intent intent = new Intent(MainActivity.this, EmailChangeActivity.class);
-						startActivity(intent);
-					}
-				});
+				Intent emailIntent = new Intent(MainActivity.this, EmailChangeActivity.class);
+				startActivity(emailIntent);
 				break;
 			case R.id.changePasswordButton:
-				chagnePasswordButton.setOnClickListener(new Button.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						// TODO Auto-generated method stub
-						Intent intent = new Intent(MainActivity.this, PasswordChangeActivity.class);
-						startActivity(intent);
-					}
-				});
+				Intent passIntent = new Intent(MainActivity.this, PasswordChangeActivity.class);
+				startActivity(passIntent);
 				break;
 			case R.id.supportButton:
-				supportButton.setOnClickListener(new Button.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						// TODO Auto-generated method stub
-						Intent intent = new Intent(MainActivity.this, SupportActivity.class);
-						startActivity(intent);
-					}
-				});
+				Intent supportIntent = new Intent(MainActivity.this, SupportActivity.class);
+				startActivity(supportIntent);
 				break;
 			}
 

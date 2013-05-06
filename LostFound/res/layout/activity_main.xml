@@ -9,38 +9,56 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
-    <ImageView
+    <RelativeLayout
+        android:id="@+id/RelativeLayout1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/image_replacement"
-        android:src="@drawable/test_image" />
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/settingButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/main_setting" />
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/image_logo_descripter"
+            android:src="@drawable/logo" />
 
-    <Button
-        android:id="@+id/changeEmailButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/main_changeEmail" />
+    </RelativeLayout>
 
-    <Button
-        android:id="@+id/changePasswordButton"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/main_changePassword" />
+        android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/supportButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/main_support" />
+        <Button
+            android:id="@+id/settingButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/main_setting" />
+
+        <Button
+            android:id="@+id/changeEmailButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/main_changeEmail" />
+
+        <Button
+            android:id="@+id/changePasswordButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/main_changePassword" />
+
+        <Button
+            android:id="@+id/supportButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/main_support" />
+    </LinearLayout>
 
 </LinearLayout>

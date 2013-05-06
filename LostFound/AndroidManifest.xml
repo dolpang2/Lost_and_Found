@@ -39,7 +39,8 @@
         </activity>
         <activity
             android:name="kr.lee.lostfound.SignupActivity"
-            android:label="@string/signup_lable" >
+            android:label="@string/signup_lable"
+            android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
             android:name="kr.lee.lostfound.StartupActivity"

@@ -76,7 +76,7 @@ public class MainActivity extends Activity {
 			mDBHelper = new LocalDBAdapter(this);
 			mDBHelper.open(); // DB Open
 			mDBHelper.deleteAllMember(); // Local DB Reroll
-			mDBHelper.deleteOption();  // Local DB Reroll
+			mDBHelper.deleteOption(); // Local DB Reroll
 
 			Toast.makeText(this, "모든 로컬 데이터베이스가 삭제되었습니다.", Toast.LENGTH_SHORT).show();
 			Toast.makeText(this, "회원가입 테스트 용도로만 사용하세요!!", Toast.LENGTH_SHORT).show();

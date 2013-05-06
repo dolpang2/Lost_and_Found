@@ -19,7 +19,7 @@ public class SMSReceiver extends BroadcastReceiver {
 		mDBHelper = new LocalDBAdapter(context);
 		mDBHelper.open(); // DB Open
 
-		Cursor memberCursor = mDBHelper.selectAllOption();
+		Cursor memberCursor = mDBHelper.selectAllMember();
 		String pass = memberCursor.getString(memberCursor
 				.getColumnIndexOrThrow(LocalDBAdapter.KEY_MEMBER_PASS));
 

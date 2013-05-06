@@ -49,7 +49,8 @@ public class SignupActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		
+		Log.e("Test", "Change Character Set");
 		int alreadyExist = 0;
 
 		mDBHelper = new LocalDBAdapter(this);
@@ -67,9 +68,9 @@ public class SignupActivity extends Activity {
 		case 0:
 			break;
 		default:
-			mDBHelper.deleteAllMember(); // ·ÎÄÃ DB Reroll
-			Toast.makeText(SignupActivity.this, "Local DBÀÇ µ¥ÀÌÅÍ°¡ ¼Õ»óµÇ¾ú½À´Ï´Ù.", Toast.LENGTH_SHORT).show();
-			Toast.makeText(SignupActivity.this, "Local DB¸¦ ÃÊ±âÈ­ÇÕ´Ï´Ù.", Toast.LENGTH_SHORT).show();
+			mDBHelper.deleteAllMember(); // ï¿½ï¿½ï¿½ï¿½ DB Reroll
+			Toast.makeText(SignupActivity.this, "Local DBï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½Õ»ï¿½Ç¾ï¿½ï¿½ï¿½Ï´ï¿½.", Toast.LENGTH_SHORT).show();
+			Toast.makeText(SignupActivity.this, "Local DBï¿½ï¿½ ï¿½Ê±ï¿½È­ï¿½Õ´Ï´ï¿½.", Toast.LENGTH_SHORT).show();
 			break;
 		}
 
@@ -90,25 +91,25 @@ public class SignupActivity extends Activity {
 				String pass = passText.getText().toString();
 				String mail = mailText.getText().toString();
 				if (!agree) {
-					dialogBuilder.setTitle("°¡ÀÔ ½ÇÆÐ").setMessage("°³ÀÎÁ¤º¸ ÀÌ¿ë¿¡\nµ¿ÀÇÇÏ¼Å¾ß ÇÕ´Ï´Ù.")
+					dialogBuilder.setTitle("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½").setMessage("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¿ë¿¡\nï¿½ï¿½ï¿½ï¿½ï¿½Ï¼Å¾ï¿½ ï¿½Õ´Ï´ï¿½.")
 							.setIcon(android.R.drawable.ic_dialog_alert)
-							.setPositiveButton("È®ÀÎ", new DialogInterface.OnClickListener() {
+							.setPositiveButton("È®ï¿½ï¿½", new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog, int which) {
 								}
 							}).show();
 				} else if (pass.length() != 4) {
 					// it's not Length 4 or Not Positive Integer
-					dialogBuilder.setTitle("°¡ÀÔ ½ÇÆÐ").setMessage("4ÀÚ¸®ÀÇ ¼ýÀÚ¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä")
+					dialogBuilder.setTitle("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½").setMessage("4ï¿½Ú¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½")
 							.setIcon(android.R.drawable.ic_dialog_alert)
-							.setPositiveButton("È®ÀÎ", new DialogInterface.OnClickListener() {
+							.setPositiveButton("È®ï¿½ï¿½", new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog, int which) {
 								}
 							}).show();
 				} else if (!isEmailAddress(mail)) {
 					// It's not Email Address...
-					dialogBuilder.setTitle("°¡ÀÔ ½ÇÆÐ").setMessage("À¯È¿ÇÑ ¸ÞÀÏÁÖ¼Ò¸¦\nÀÔ·ÂÇØÁÖ¼¼¿ä.")
+					dialogBuilder.setTitle("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½").setMessage("ï¿½ï¿½È¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼Ò¸ï¿½\nï¿½Ô·ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½.")
 							.setIcon(android.R.drawable.ic_dialog_alert)
-							.setPositiveButton("È®ÀÎ", new DialogInterface.OnClickListener() {
+							.setPositiveButton("È®ï¿½ï¿½", new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog, int which) {
 								}
 							}).show();
@@ -130,12 +131,12 @@ public class SignupActivity extends Activity {
 
 	/*
 	 * Unused Method - isPositiveInteger
-	 * ÁÖ¾îÁø String¿¡ ´ëÇØ ±× StringÀÌ ¾ç¼öÀÇ ¼ýÀÚÀÎÁö È®ÀÎÇÏ´Â ÇÔ¼ö.
-	 * ±×·±µ¥ È®ÀÎÇØ º¸´Ï ÀÌ¹Ì EditText¿¡¼­ ¾ç¼öÀÇ ¼ýÀÚ¸¸ ÀÔ·Â °¡´ÉÇÑ°ÍÀ¸·Î ÆÄ¾ÇµÇ¼­
-	 * »ç¿ë ¾ÈÇÏ°í ÀÖÀ½. »ç¿ë ¾ÈÇØ¼­ »ý±â´Â WarningÀ» ¾ïÁö·Î ¸·°í ÀÖÀ¸¹Ç·Î,
-	 * »ç¿ëÇÒ °æ¿ì @SuppressWarnings¸¦ ÇìÁ¦ÇÏ¼Åµµ µË´Ï´Ù.
+	 * ï¿½Ö¾ï¿½ï¿½ï¿½ Stringï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ Stringï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½.
+	 * ï¿½×·ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ EditTextï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¾ÇµÇ¼ï¿½
+	 * ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½. ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ Warningï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½,
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ @SuppressWarningsï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¼Åµï¿½ ï¿½Ë´Ï´ï¿½.
 	 * 
-	 * 2013. 5. 5 ÀÌÁ¤¿ì
+	 * 2013. 5. 5 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	@SuppressWarnings("unused")
 	private static boolean isPositiveInteger(String str) {
@@ -163,12 +164,12 @@ public class SignupActivity extends Activity {
 		return matchFound;
 	}
 
-	/* AsyncTask<Å×½ºÅ© ½ÇÇà½Ã ¹Þ´Â ÆÄ¶ó¸ÞÅÍ, ¹é±×¶ó¿îµå -> ÇÚµé·¯ Àü¼Û ÆÄ¶ó¸ÞÅÍ, ¹é±×¶ó¿îµå ¸®ÅÏ> */
+	/* AsyncTask<ï¿½×½ï¿½Å© ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½×¶ï¿½ï¿½ï¿½ -> ï¿½Úµé·¯ ï¿½ï¿½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½×¶ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½> */
 	private class ExampleAsyncTask extends AsyncTask<String, Integer, Integer> {
 		@Override
 		protected void onCancelled() {
-			// ¿©±â·Î ºüÁö´Â °æ¿ì´Â ¾øÀ»°ÅÀÓ
-			Toast.makeText(SignupActivity.this, "È¸¿ø°¡ÀÔ ÁøÇàÀÌ °­Á¦·Î Ãë¼ÒµÇ¾ú½À´Ï´Ù.", Toast.LENGTH_LONG).show();
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			Toast.makeText(SignupActivity.this, "È¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ÒµÇ¾ï¿½ï¿½ï¿½Ï´ï¿½.", Toast.LENGTH_LONG).show();
 			signupDialog.dismiss();
 			super.onCancelled();
 		}
@@ -177,61 +178,61 @@ public class SignupActivity extends Activity {
 		protected void onPostExecute(Integer result) {
 			switch (result) {
 			case 6:
-				mDBHelper.deleteAllMember(); // ·ÎÄÃ DB ÃÊ±âÈ­..
-				dialogBuilder.setTitle("°¡ÀÔ ½ÇÆÐ").setMessage("·Î°É DB Á¤º¸ ÀúÀå¿¡ ½ÇÆÐÇÏ¿´½À´Ï´Ù. °ü¸®ÀÚ¿¡°Ô ¹®ÀÇÇØÁÖ¼¼¿ä.")
+				mDBHelper.deleteAllMember(); // ï¿½ï¿½ï¿½ï¿½ DB ï¿½Ê±ï¿½È­..
+				dialogBuilder.setTitle("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½").setMessage("ï¿½Î°ï¿½ DB ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½å¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ï´ï¿½. ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½.")
 						.setIcon(android.R.drawable.ic_dialog_alert)
-						.setPositiveButton("È®ÀÎ", new DialogInterface.OnClickListener() {
+						.setPositiveButton("È®ï¿½ï¿½", new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int which) {
 							}
 						}).show();
 				break;
 			case 5:
-				mDBHelper.deleteAllMember(); // ·ÎÄÃ DB Reroll
-				dialogBuilder.setTitle("°¡ÀÔ ½ÇÆÐ").setMessage("À¥¼­¹ö¿Í Åë½Å¿¡ ½ÇÆÐÇÏ¿´½À´Ï´Ù. ÀÎÅÍ³Ý ¿¬°á»óÅÂ¸¦ È®ÀÎÇØÁÖ¼¼¿ä.")
+				mDBHelper.deleteAllMember(); // ï¿½ï¿½ï¿½ï¿½ DB Reroll
+				dialogBuilder.setTitle("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½").setMessage("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ï´ï¿½. ï¿½ï¿½ï¿½Í³ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¸ï¿½ È®ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½.")
 						.setIcon(android.R.drawable.ic_dialog_alert)
-						.setPositiveButton("È®ÀÎ", new DialogInterface.OnClickListener() {
+						.setPositiveButton("È®ï¿½ï¿½", new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int which) {
 							}
 						}).show();
 				break;
 			case 4:
-				mDBHelper.deleteAllMember(); // ·ÎÄÃ DB Reroll
-				dialogBuilder.setTitle("°¡ÀÔ ½ÇÆÐ").setMessage("XML Parsing¿¡ ½ÇÆÐÇÏ¿´½À´Ï´Ù. °ü¸®ÀÚ¿¡°Ô ¹®ÀÇÇØÁÖ¼¼¿ä.")
+				mDBHelper.deleteAllMember(); // ï¿½ï¿½ï¿½ï¿½ DB Reroll
+				dialogBuilder.setTitle("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½").setMessage("XML Parsingï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ï´ï¿½. ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½.")
 						.setIcon(android.R.drawable.ic_dialog_alert)
-						.setPositiveButton("È®ÀÎ", new DialogInterface.OnClickListener() {
+						.setPositiveButton("È®ï¿½ï¿½", new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int which) {
 							}
 						}).show();
 				break;
 			case 3:
-				mDBHelper.deleteAllMember(); // ·ÎÄÃ DB Reroll
-				dialogBuilder.setTitle("°¡ÀÔ ½ÇÆÐ").setMessage("MySQL Á¢¼Ó¿¡ ½ÇÆÐÇÏ¿´½À´Ï´Ù. °ü¸®ÀÚ¿¡°Ô ¹®ÀÇÇØÁÖ¼¼¿ä.")
+				mDBHelper.deleteAllMember(); // ï¿½ï¿½ï¿½ï¿½ DB Reroll
+				dialogBuilder.setTitle("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½").setMessage("MySQL ï¿½ï¿½ï¿½Ó¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ï´ï¿½. ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½.")
 						.setIcon(android.R.drawable.ic_dialog_alert)
-						.setPositiveButton("È®ÀÎ", new DialogInterface.OnClickListener() {
+						.setPositiveButton("È®ï¿½ï¿½", new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int which) {
 							}
 						}).show();
 				break;
 			case 2:
-				mDBHelper.deleteAllMember(); // ·ÎÄÃ DB Reroll
-				dialogBuilder.setTitle("°¡ÀÔ ½ÇÆÐ").setMessage("MySQL ¹®¹ý¿¡ ¿À·ù°¡ ÀÖ½À´Ï´Ù. °ü¸®ÀÚ¿¡°Ô ¹®ÀÇÇØÁÖ¼¼¿ä.")
+				mDBHelper.deleteAllMember(); // ï¿½ï¿½ï¿½ï¿½ DB Reroll
+				dialogBuilder.setTitle("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½").setMessage("MySQL ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö½ï¿½ï¿½Ï´ï¿½. ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½.")
 						.setIcon(android.R.drawable.ic_dialog_alert)
-						.setPositiveButton("È®ÀÎ", new DialogInterface.OnClickListener() {
+						.setPositiveButton("È®ï¿½ï¿½", new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int which) {
 							}
 						}).show();
 				break;
 			case 1:
-				mDBHelper.deleteAllMember(); // ·ÎÄÃ DB Reroll
-				dialogBuilder.setTitle("°¡ÀÔ ½ÇÆÐ").setMessage("¸ÞÀÏ ÁÖ¼Ò°¡ Áßº¹µÇ¾ú½À´Ï´Ù. ´Ù¸¥ ¸ÞÀÏÁÖ¼Ò¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.")
+				mDBHelper.deleteAllMember(); // ï¿½ï¿½ï¿½ï¿½ DB Reroll
+				dialogBuilder.setTitle("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½").setMessage("ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¼Ò°ï¿½ ï¿½ßºï¿½ï¿½Ç¾ï¿½ï¿½ï¿½Ï´ï¿½. ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼Ò¸ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½.")
 						.setIcon(android.R.drawable.ic_dialog_alert)
-						.setPositiveButton("È®ÀÎ", new DialogInterface.OnClickListener() {
+						.setPositiveButton("È®ï¿½ï¿½", new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int which) {
 							}
 						}).show();
 				break;
 			case 0:
-				Toast.makeText(SignupActivity.this, "°¡ÀÔÀÌ Á¤»óÀûÀ¸·Î Ã³¸®µÇ¾ú½À´Ï´Ù.", Toast.LENGTH_LONG).show();
+				Toast.makeText(SignupActivity.this, "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½Ï´ï¿½.", Toast.LENGTH_LONG).show();
 				Intent mainIntent = new Intent(SignupActivity.this, MainActivity.class);
 				signupDialog.dismiss();
 				startActivity(mainIntent);
@@ -243,10 +244,10 @@ public class SignupActivity extends Activity {
 
 		@Override
 		protected void onPreExecute() {
-			// ½ÇÇà µÇ±âÀü ½ÇÇàµÇ´Â ¸Þ¼Òµå
+			// ï¿½ï¿½ï¿½ï¿½ ï¿½Ç±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½Þ¼Òµï¿½
 			signupDialog = new ProgressDialog(SignupActivity.this);
-			signupDialog.setTitle("È¸¿ø°¡ÀÔ Áß");
-			signupDialog.setMessage("È¸¿ø°¡ÀÔ ÁøÇà ÁßÀÔ´Ï´Ù..");
+			signupDialog.setTitle("È¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½");
+			signupDialog.setMessage("È¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ô´Ï´ï¿½..");
 			signupDialog.show();
 		}
 
@@ -254,20 +255,20 @@ public class SignupActivity extends Activity {
 		protected void onProgressUpdate(Integer... values) {
 			switch (values[0]) {
 			case 6:
-				signupDialog.setMessage("·Î°É DB¿¡ Á¤º¸ ÀúÀå Áß....                 ");
+				signupDialog.setMessage("ï¿½Î°ï¿½ DBï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½....                 ");
 				break;
 			case 5:
-				signupDialog.setMessage("À¥¼­¹ö¿¡ Á¤º¸ Àü´Þ Áß....                    ");
+				signupDialog.setMessage("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½....                    ");
 				break;
 			case 4:
-				signupDialog.setMessage("À¥¼­¹öÀÇ ÀÀ´äÀ» Ã³¸®ÇÏ´Â Áß....");
+				signupDialog.setMessage("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½....");
 				break;
 			}
 		}
 
 		@Override
 		protected Integer doInBackground(String... params) {
-			// ¹é±×¶ó¿îµå¿¡¼­ ½ÇÇàÇÒ ¸Þ¼Òµå
+			// ï¿½ï¿½×¶ï¿½ï¿½å¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼Òµï¿½
 			int result = 6; // if Background works great, result 0
 
 			String birth = params[0];
@@ -278,24 +279,24 @@ public class SignupActivity extends Activity {
 			int parseCode;
 
 			try {
-				publishProgress(result); // ·Î°É DB¿¡ Á¤º¸ ÀúÀå Áß...
+				publishProgress(result); // ï¿½Î°ï¿½ DBï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½...
 				mDBHelper.createMember(birth, mail, pass);
 				result--;
 			} catch (SQLException e) {
 				Log.e("SignupActivity - LocalDBHelper", e.toString());
-				return result; // ½ÇÆÐÇÏ¸é 6ÀÌ µé¾î°¨
+				return result; // ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ 6ï¿½ï¿½ ï¿½ï¿½î°¨
 			}
 
 			try {
-				publishProgress(result); // À¥¼­¹ö¿¡ Á¤º¸ Àü´Þ Áß...
+				publishProgress(result); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½...
 				responseData = JSPCommunicator.sendMemberData(birth, mail, pass, url);
 				result--;
 			} catch (Exception e) {
 				Log.e("SignupActivity - JSPComunicator", e.toString());
-				return result; // ½ÇÆÐÇÏ¸é 5°¡ µé¾î°¨
+				return result; // ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ 5ï¿½ï¿½ ï¿½ï¿½î°¨
 			}
 
-			publishProgress(result); // À¥¼­¹öÀÇ ÀÀ´äÀ» ±â´Ù¸®´Â Áß...
+			publishProgress(result); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ù¸ï¿½ï¿½ï¿½ ï¿½ï¿½...
 			Log.e("SignupActivity - ParseXML", responseData);
 			try {
 				parseCode = ParseXML(responseData);
@@ -321,10 +322,10 @@ public class SignupActivity extends Activity {
 				}
 			} catch (Exception e) {
 				Log.e("SignupActivity - ParseXML", e.getMessage());
-				return result; // XMLParse ½ÇÆÐ, 4 ¹ÝÈ¯.
+				return result; // XMLParse ï¿½ï¿½ï¿½ï¿½, 4 ï¿½ï¿½È¯.
 			}
 
-			publishProgress(result); // À¥ DB¿¡ Á¤º¸ ÀúÀå ¼º°ø.
+			publishProgress(result); // ï¿½ï¿½ DBï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 			return result;
 		}
 	}
@@ -332,18 +333,18 @@ public class SignupActivity extends Activity {
 	public static int ParseXML(String xml) throws Exception {
 		int result;
 
-		// XML Document °´Ã¼ »ý¼º
+		// XML Document ï¿½ï¿½Ã¼ ï¿½ï¿½
 		InputSource is = new InputSource(new StringReader(xml));
 		Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(is);
 
-		// xpath »ý¼º
+		// xpath ï¿½ï¿½
 		XPath xpath = XPathFactory.newInstance().newXPath();
 
-		// °ª Ãâ·Â
+		// ï¿½ï¿½ ï¿½ï¿½ï¿½
 		result = Integer.parseInt(xpath.evaluate("//response/code", document, XPathConstants.STRING)
 				.toString());
 		Log.e("ParseXML", xpath.evaluate("//response/state", document, XPathConstants.STRING).toString());
 
-		return result; // code°ª Ãâ·Â.
+		return result; // codeï¿½ï¿½ ï¿½ï¿½ï¿½.
 	}
 }

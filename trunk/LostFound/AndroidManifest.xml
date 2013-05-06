@@ -16,7 +16,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/main_lable"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/Theme.MyTheme" >
         <activity
             android:name="kr.lee.lostfound.MainActivity"
             android:label="@string/main_lable" >
@@ -40,6 +40,10 @@
         <activity
             android:name="kr.lee.lostfound.SignupActivity"
             android:label="@string/signup_lable" >
+        </activity>
+        <activity
+            android:name="kr.lee.lostfound.StartupActivity"
+            android:label="@string/title_activity_startup" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

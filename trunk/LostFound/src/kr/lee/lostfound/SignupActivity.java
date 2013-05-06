@@ -49,31 +49,6 @@ public class SignupActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		Log.e("Test", "Change Character Set");
-		int alreadyExist = 0;
-
-		mDBHelper = new LocalDBAdapter(this);
-		mDBHelper.open(); // DB Open
-
-		Cursor localDBResult = mDBHelper.selectAllMember();
-		alreadyExist = localDBResult.getCount();
-
-		switch (alreadyExist) {
-		case 1:
-			Intent mainIntent = new Intent(SignupActivity.this, MainActivity.class);
-			startActivity(mainIntent);
-			finish();
-			break;
-		case 0:
-			break;
-		default:
-			mDBHelper.deleteAllMember(); // Local DB Reroll
-			Toast.makeText(SignupActivity.this, "Local DB가 손상되었습니다.", Toast.LENGTH_SHORT).show();
-			Toast.makeText(SignupActivity.this, "Local DB를 초기화합니다.", Toast.LENGTH_SHORT).show();
-			break;
-		}
-
 		setContentView(R.layout.activity_signup);
 
 		dialogBuilder = new AlertDialog.Builder(SignupActivity.this);

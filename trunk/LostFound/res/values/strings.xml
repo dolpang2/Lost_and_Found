@@ -5,6 +5,7 @@
     <string name="action_settings">Settings</string>
     <string name="main_lable">Main</string>
     <string name="image_replacement">Image Cracked!</string>
+    <string name="image_logo_descripter">Lost+Found Logo</string>
     <string name="main_setting">설정</string>
     <string name="main_changeEmail">등록된 이메일 변경</string>
     <string name="main_changePassword">비밀번호 변경</string>
@@ -36,5 +37,7 @@
     <string name="signup_mail">이메일 주소</string>
     <string name="signup_mail_hint">이메일 형식에 맞춰 입력해주세요</string>
     <string name="signup_complete">가입</string>
+    <string name="title_activity_startup">StartupActivity</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>

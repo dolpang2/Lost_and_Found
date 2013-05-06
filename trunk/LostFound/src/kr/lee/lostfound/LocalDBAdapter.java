@@ -101,4 +101,51 @@ public class LocalDBAdapter {
 		cursor.moveToFirst();
 		return cursor;
 	}
+
+	public void createOption() throws SQLException {
+		ContentValues row = new ContentValues();
+		row.put(KEY_OPTION_USE_SIREN, true);
+		row.put(KEY_OPTION_USE_GPS, false);
+		row.put(KEY_OPTION_USE_CAMERA, false);
+		row.put(KEY_OPTION_USE_LOCK, false);
+		row.put(KEY_OPTION_USE_LOCKFAIL, false);
+		row.put(KEY_OPTION_USE_BACKUP, false);
+		row.put(KEY_OPTION_TTS_MESSAGE, "010-8266-8969");
+
+		mDb.insert(TABLE_OPTION_NAME, null, row);
+	}
+	
+	public int deleteOption() throws SQLException {
+		int affectedRow = mDb.delete(TABLE_OPTION_NAME, null, null);
+		return affectedRow;
+	}
+
+	public void updateOption(ContentValues updateData) throws SQLException {
+		mDb.update(TABLE_OPTION_NAME, updateData, null, null);
+	}
+
+	public Cursor selectAllOption() throws SQLException {
+		Cursor cursor;
+		cursor = mDb.query(TABLE_OPTION_NAME, new String[] { KEY_OPTION_USE_SIREN, KEY_OPTION_USE_GPS,
+				KEY_OPTION_USE_CAMERA, KEY_OPTION_USE_LOCK, KEY_OPTION_USE_LOCKFAIL, KEY_OPTION_USE_BACKUP },
+				null, null, null, null, null);
+		cursor.moveToFirst();
+		return cursor;
+	}
+
+	public void updateSirenMessage(String message) throws SQLException {
+		ContentValues row = new ContentValues();
+		row.put(KEY_OPTION_TTS_MESSAGE, message);
+
+		mDb.update(TABLE_OPTION_NAME, row, null, null);
+	}
+
+	public Cursor selectSirenMessage() throws SQLException {
+		Cursor cursor;
+		cursor = mDb.query(TABLE_OPTION_NAME, new String[] { KEY_OPTION_TTS_MESSAGE }, null, null, null,
+				null, null);
+		cursor.moveToFirst();
+		
+		return cursor;
+	}
 }

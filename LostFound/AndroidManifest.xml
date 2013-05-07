@@ -80,7 +80,9 @@
         </activity>
         <activity
             android:name="kr.lee.lostfound.SetSirenMessageActivity"
-            android:label="@string/title_activity_set_siren_message" >
+            android:label="@string/title_activity_set_siren_message"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 

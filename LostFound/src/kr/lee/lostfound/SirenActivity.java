@@ -92,11 +92,11 @@ public class SirenActivity extends Activity implements TextToSpeech.OnInitListen
 
 	private void saySiren_kor() {
 		mDBHelper.selectSirenMessage();
-		String fixedMessage = "이 폰은 이 핸드폰은 주인이 애타게 기다리고 있는 분실 폰입니다. 아래의 번호로 꼭 전화해주세요~";
-		mTts.setSpeechRate((float) 1);
+		String fixedMessage = "이 핸드폰은 주인이 애타게 기다리고 있는 분실 폰입니다. 아래의 번호로 꼭 전화해주세요~";
+		mTts.setSpeechRate((float) 1.4);
 		mTts.speak(fixedMessage, TextToSpeech.QUEUE_FLUSH, // Drop all pending entries in the playback queue.
 				null);
-		mTts.setSpeechRate((float) 0.7);
+		mTts.setSpeechRate((float) 1);
 		mTts.speak(message, TextToSpeech.QUEUE_ADD, null);
 	}
 }

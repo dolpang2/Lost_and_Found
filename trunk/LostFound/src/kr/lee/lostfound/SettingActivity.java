@@ -2,6 +2,7 @@ package kr.lee.lostfound;
 
 import android.app.Activity;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -71,7 +72,8 @@ public class SettingActivity extends Activity implements OnClickListener {
 		int id = v.getId();
 		switch (id) {
 		case R.id.setWarningMessage:
-			Toast.makeText(SettingActivity.this, "구현중입니다...", Toast.LENGTH_SHORT).show();
+			Intent setWarningIntent = new Intent(SettingActivity.this, SetSirenMessageActivity.class);
+			startActivity(setWarningIntent);
 			break;
 		case R.id.setLockMessage:
 			Toast.makeText(SettingActivity.this, "구현중입니다...", Toast.LENGTH_SHORT).show();

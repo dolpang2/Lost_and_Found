@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="kr.lee.lostfound"
-    android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionCode="2"
+    android:versionName="1.1" >
 
     <uses-sdk
         android:minSdkVersion="10"
@@ -19,32 +19,46 @@
         android:theme="@style/Theme.MyTheme" >
         <activity
             android:name="kr.lee.lostfound.MainActivity"
-            android:label="@string/main_lable" >
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/main_lable"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="kr.lee.lostfound.SettingActivity"
-            android:label="@string/setting_lable" >
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/setting_lable"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="kr.lee.lostfound.EmailChangeActivity"
-            android:label="@string/emailchange_lable" >
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/emailchange_lable"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="kr.lee.lostfound.PasswordChangeActivity"
-            android:label="@string/passwordchange_lable" >
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/passwordchange_lable"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="kr.lee.lostfound.SupportActivity"
-            android:label="@string/support_lable" >
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/support_lable"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="kr.lee.lostfound.SignupActivity"
+            android:configChanges="keyboardHidden|orientation"
             android:label="@string/signup_lable"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
             android:name="kr.lee.lostfound.StartupActivity"
-            android:label="@string/title_activity_startup" >
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/title_activity_startup"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -52,12 +66,22 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name="SMSReceiver" >
+        <receiver android:name="kr.lee.lostfound.SMSReceiver" >
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
-        <activity android:name="kr.lee.lostfound.SirenActivity"></activity>
+
+        <activity
+            android:name="kr.lee.lostfound.SirenActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/siren_lable"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="kr.lee.lostfound.SetSirenMessageActivity"
+            android:label="@string/title_activity_set_siren_message" >
+        </activity>
     </application>
 
 </manifest>

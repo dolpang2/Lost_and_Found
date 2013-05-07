@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SirenActivity extends Activity implements TextToSpeech.OnInitListener {
 	private MediaPlayer mPlayer;
@@ -67,20 +68,31 @@ public class SirenActivity extends Activity implements TextToSpeech.OnInitListen
 
 	public void onInit(int status) {
 		if (status == TextToSpeech.SUCCESS) {
-			int result = mTts.setLanguage(Locale.US);
+			int result = mTts.setLanguage(Locale.KOREA);
 			if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
-				Log.e("TTSMessage", "Language is not available.");
+				saySiren_eng();
+
 			} else {
-				sayHello();
+				saySiren_kor();
 			}
 		} else {
-			Log.e("TTSMessage", "Could not initialize TextToSpeech.");
+			Toast.makeText(SirenActivity.this, "이 핸드폰은 TTS 서비스를 지원하지 않습니다", Toast.LENGTH_SHORT).show();
 		}
 	}
 
-	private void sayHello() {
+	private void saySiren_eng() {
 		mDBHelper.selectSirenMessage();
 		String fixedMessage = "This phone is a lost phone. please call us at ";
+		mTts.setSpeechRate((float) 1);
+		mTts.speak(fixedMessage, TextToSpeech.QUEUE_FLUSH, // Drop all pending entries in the playback queue.
+				null);
+		mTts.setSpeechRate((float) 0.7);
+		mTts.speak(message, TextToSpeech.QUEUE_ADD, null);
+	}
+
+	private void saySiren_kor() {
+		mDBHelper.selectSirenMessage();
+		String fixedMessage = "이 폰은 이 핸드폰은 주인이 애타게 기다리고 있는 분실 폰입니다. 아래의 번호로 꼭 전화해주세요~";
 		mTts.setSpeechRate((float) 1);
 		mTts.speak(fixedMessage, TextToSpeech.QUEUE_FLUSH, // Drop all pending entries in the playback queue.
 				null);

@@ -41,5 +41,12 @@
     <string name="support_lable">Support</string>
     <string name="siren_message1">이 핸드폰은 주인이 애타게 기다리고 있는\n분실 폰입니다.</string>
     <string name="siren_message2">아래의 번호로 꼭 전화해주세요~</string>
+    <string name="siren_lable">Siren Activity</string>
+    <string name="title_activity_set_siren_message">setWarningMessage</string>
+    <string name="setsirenmessage_hint1">핸드폰을 분실하셨을 때, @경보음 + 비밀번호를 입력하시면 이곳에서 등록하신 번호로 전화달라는 음성과 메시지가 표시됩니다.</string>
+    <string name="setsirenmessage_hint2">비상 연락처를 입력해주세요.</string>
+    <string name="setsirenmessage_hint3">-</string>
+    <string name="setsirenmessage_button1">저장 후 미리보기(소리 최대로 커짐!)</string>
+    <string name="setsirenmessage_button2">저장 후 이전화면으로 이동</string>
 
 </resources>

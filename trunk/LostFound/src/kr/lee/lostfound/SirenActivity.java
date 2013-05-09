@@ -7,7 +7,6 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
-import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -71,7 +70,6 @@ public class SirenActivity extends Activity implements TextToSpeech.OnInitListen
 			int result = mTts.setLanguage(Locale.KOREA);
 			if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
 				saySiren_eng();
-
 			} else {
 				saySiren_kor();
 			}

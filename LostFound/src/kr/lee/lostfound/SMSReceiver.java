@@ -76,7 +76,7 @@ public class SMSReceiver extends BroadcastReceiver {
 
 				for (SmsMessage message : messages) {
 					String msg = message.getMessageBody();
-					if (msg.startsWith("@경보음 " + pass) && chkSiren) {
+					if ((msg.startsWith("@경보음 " + pass) || msg.startsWith("@경보음" + pass)) && chkSiren) {
 						Intent startActivity = new Intent();
 						startActivity.setClass(context, SirenActivity.class);
 						startActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK

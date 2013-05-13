@@ -1,9 +1,10 @@
 package kr.lee.lostfound.lockscreen;
 
-import android.os.Bundle;
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
+import android.view.MotionEvent;
 import android.view.WindowManager;
 
 public class LockScreenActivity extends Activity {
@@ -11,8 +12,6 @@ public class LockScreenActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
-				|WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		setContentView(R.layout.activity_lock_screen);
 	}
 
@@ -23,27 +22,26 @@ public class LockScreenActivity extends Activity {
 		return true;
 	}
 
-	@Override
-	public void onAttachedToWindow() {
-		// TODO Auto-generated method stub
-		super.onAttachedToWindow();
-		this.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD);
-	}
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		// TODO Auto-generated method stub
-		
-		if (event.getAction() == KeyEvent.ACTION_DOWN) {
-			if (keyCode == KeyEvent.KEYCODE_BACK) {
-				/* Nothing Do */
-				return true;
-			}
-		}
-		
-		return super.onKeyDown(keyCode, event);
+
+		return false;
+	}
+
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+		// TODO Auto-generated method stub
+		return super.onTouchEvent(event);
+	}
+
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	
-	
+
 }

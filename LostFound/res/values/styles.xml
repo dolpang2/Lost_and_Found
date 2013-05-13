@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <color name="pitch_black">#202020</color>
-    <color name="pitch_yellow">#FFD700</color>
-
-    <style name="Theme.MyTheme" parent="@android:style/Theme">
-    </style>
-</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">LockScreen</string>
+    <string name="action_settings">Settings</string>
+    <string name="lockScreen_Message1">이 핸드폰은 주인이 애타게 기다리고 있는\n분실 폰입니다.</string>
+    <string name="lockScreen_Message2">아래의 번호로 꼭 전화해주세요~</string>
+
+</resources>

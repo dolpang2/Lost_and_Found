@@ -11,6 +11,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 
 public class JSPCommunicator {
 	public static String sendMemberData(String birth, String mail, String pass, String url) throws Exception {
@@ -18,9 +20,16 @@ public class JSPCommunicator {
 		HttpPost request = makeHttpPost(birth, mail, pass, url);
 
 		HttpClient client = new DefaultHttpClient();
-		ResponseHandler<String> reshandler = new BasicResponseHandler();
-		String result = client.execute(request, reshandler);
-
+		HttpParams params = client.getParams();
+		HttpConnectionParams.setConnectionTimeout(params, 5000); // Connection Timeout Limit 5s
+		String result = "";
+		try {
+			ResponseHandler<String> reshandler = new BasicResponseHandler();
+			result = client.execute(request, reshandler);
+		} catch (Exception e) {
+			e.printStackTrace();
+			// Result not created, so return value is empty string
+		}
 		return result;
 	}
 

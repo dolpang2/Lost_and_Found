@@ -176,7 +176,7 @@ public class SignupActivity extends Activity {
 				break;
 			case 4:
 				mDBHelper.deleteAllMember(); // Local DB Delete
-				dialogBuilder.setTitle("가입 실패").setMessage("XML Parsing에 실패하였습니다. 개발자에게 문의바랍니다.")
+				dialogBuilder.setTitle("가입 실패").setMessage("웹 서버 연결 제한 시간이 초과되었습니다. 인터넷 연결상태를 확인해주세요.")
 						.setIcon(android.R.drawable.ic_dialog_alert)
 						.setPositiveButton("확인", new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int which) {
@@ -185,7 +185,7 @@ public class SignupActivity extends Activity {
 				break;
 			case 3:
 				mDBHelper.deleteAllMember(); // Local DB Delete
-				dialogBuilder.setTitle("가입 실패").setMessage("웹 DB 접근이 거부되었습니다. 개발자에게 문의바랍니다.")
+				dialogBuilder.setTitle("가입 실패").setMessage("데이터베이스 접근이 거부되었습니다. 개발자에게 문의바랍니다.")
 						.setIcon(android.R.drawable.ic_dialog_alert)
 						.setPositiveButton("확인", new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int which) {
@@ -194,7 +194,7 @@ public class SignupActivity extends Activity {
 				break;
 			case 2:
 				mDBHelper.deleteAllMember(); // Local DB Delete
-				dialogBuilder.setTitle("가입 실패").setMessage("웹 DB Query문에 문법 오류가 있습니다. 개발자에게 문의바랍니다.")
+				dialogBuilder.setTitle("가입 실패").setMessage("데이터 전송에 오류가 있습니다. 개발자에게 문의바랍니다.")
 						.setIcon(android.R.drawable.ic_dialog_alert)
 						.setPositiveButton("확인", new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int which) {
@@ -277,6 +277,11 @@ public class SignupActivity extends Activity {
 			}
 
 			publishProgress(result); // Parse Result Data
+			if (responseData.equals("")) {
+				// Timeout or Unknown Exception
+				return result; // return 4 if failed
+			}
+
 			Log.e("SignupActivity - ParseXML", responseData);
 			try {
 				parseCode = ParseXML(responseData);
@@ -305,6 +310,11 @@ public class SignupActivity extends Activity {
 				case 0:
 					result = 0;
 					break;
+				default:
+					// Unknown MySQL Exception
+					result = 2;
+					break;
+
 				}
 			} catch (Exception e) {
 				Log.e("SignupActivity - ParseXML", e.getMessage());

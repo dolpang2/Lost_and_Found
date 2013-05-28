@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ContactsHandling</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="main_backup_button_vcf">Backup your Contacts by vcf</string>
+    <string name="main_backup_button_csv">Backup your Contacts by csv</string>
+    <string name="main_restore_button">Restore your Contacts by csv</string>
+
+</resources>

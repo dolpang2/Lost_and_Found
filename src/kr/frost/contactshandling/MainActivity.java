@@ -1,7 +1,5 @@
 package kr.frost.contactshandling;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -10,10 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.ContentProviderOperation;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.ContactsContract;
@@ -40,10 +40,9 @@ public class MainActivity extends Activity implements OnClickListener {
 	private Button btn_backup2;
 	private Button btn_restore;
 	private TextView txt_result;
-	String selectedFilePath = "";
-	Boolean fileSelected = false;
 
-	List<String[]> contactsList = new ArrayList<String[]>();
+	private ProgressDialog restoreDialog;
+	private ProgressDialog backupDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +70,233 @@ public class MainActivity extends Activity implements OnClickListener {
 	public void onClick(View arg0) {
 		switch (arg0.getId()) {
 		case R.id.btn_backup1:
+			new BackupContactsTask().execute();
+			break;
+
+		case R.id.btn_backup2:
+			Intent intent = new Intent(getBaseContext(), FileDialog.class);
+			intent.putExtra(FileDialog.START_PATH, Environment.getExternalStorageDirectory().getPath());
+
+			intent.putExtra(FileDialog.CAN_SELECT_DIR, true);
+
+			intent.putExtra(FileDialog.SELECTION_MODE, SelectionMode.MODE_OPEN);
+
+			intent.putExtra(FileDialog.FORMAT_FILTER, new String[] { "csv" });
+
+			startActivityForResult(intent, REQUEST_SAVE);
+			break;
+
+		case R.id.btn_restore:
+
+			break;
+		}
+	}
+
+	public synchronized void onActivityResult(final int requestCode, int resultCode, final Intent data) {
+
+		if (resultCode == Activity.RESULT_OK) {
+
+			if (requestCode == REQUEST_SAVE) {
+				System.out.println("Saving...");
+			} else if (requestCode == REQUEST_LOAD) {
+				System.out.println("Loading...");
+			}
+
+			String selectedFilePath = data.getStringExtra(FileDialog.RESULT_PATH);
+			Toast.makeText(MainActivity.this, selectedFilePath, Toast.LENGTH_SHORT).show();
+			if (selectedFilePath.endsWith(".csv")) {
+				new RestoreContactsTask().execute(selectedFilePath);
+			} else {
+				Toast.makeText(MainActivity.this, "선택한 파일은 CSV파일이 아닙니다.", Toast.LENGTH_SHORT).show();
+			}
+
+		} else if (resultCode == Activity.RESULT_CANCELED) {
+			Toast.makeText(MainActivity.this, "파일이 선택되지 않았습니다.", Toast.LENGTH_SHORT).show();
+		}
+
+	}
+
+	public void writeData(List<String[]> contactsList) {
+
+	}
+
+	private class RestoreContactsTask extends AsyncTask<String, Integer, Integer> {
+		private int contactsLength = 0;
+
+		@Override
+		protected void onCancelled() {
+			// Forced Cancel, 여기로 오면 설계상 문제 있는것임....
+			Toast.makeText(MainActivity.this, "주소록 복원에 실패하였습니다.", Toast.LENGTH_SHORT).show();
+			restoreDialog.dismiss();
+			super.onCancelled();
+		}
+
+		@Override
+		protected void onPostExecute(Integer result) {
+			Toast.makeText(MainActivity.this, "주소록 복원이 성공적으로 처리되었습니다.", Toast.LENGTH_SHORT).show();
+			restoreDialog.dismiss();
+		}
+
+		@Override
+		protected void onPreExecute() {
+			// Dialog Popup
+			restoreDialog = new ProgressDialog(MainActivity.this);
+			restoreDialog.setTitle("주소록 복원 중");
+			restoreDialog.setMessage("잠시만 기다려 주세요...");
+			restoreDialog.setCancelable(false);
+			restoreDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+			restoreDialog.setMax(0);
+			restoreDialog.show();
+		}
+
+		protected void onProgressUpdate(Integer... values) {
+			restoreDialog.setProgress(values[0]);
+			restoreDialog.setMax(values[1]);
+		}
+
+		@Override
+		protected Integer doInBackground(String... params) {
+			String path = params[0];
+
+			try {
+				CSVReader reader = new CSVReader(new FileReader(path));
+				int iterator = 0;
+				String[] row;
+
+				String displayName = "";
+				String mobileNumber = "";
+				String homeNumber = "";
+				String workNumber = "";
+
+				List<?> content = reader.readAll();
+
+				contactsLength = content.size();
+
+				for (Object object : content) {
+					iterator++;
+					publishProgress(iterator, contactsLength);
+					row = (String[]) object;
+
+					displayName = row[0];
+					mobileNumber = row[1];
+					homeNumber = row[2];
+					workNumber = row[3];
+
+					ArrayList<ContentProviderOperation> ops = new ArrayList<ContentProviderOperation>();
+
+					ops.add(ContentProviderOperation.newInsert(ContactsContract.RawContacts.CONTENT_URI)
+							.withValue(ContactsContract.RawContacts.ACCOUNT_TYPE, null)
+							.withValue(ContactsContract.RawContacts.ACCOUNT_NAME, null).build());
+
+					//------------------------------------------------------ Names
+					if (displayName.compareTo("") != 0 || displayName != null) {
+						ops.add(ContentProviderOperation
+								.newInsert(ContactsContract.Data.CONTENT_URI)
+								.withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+								.withValue(ContactsContract.Data.MIMETYPE,
+										ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE)
+								.withValue(ContactsContract.CommonDataKinds.StructuredName.DISPLAY_NAME,
+										displayName).build());
+					}
+
+					//------------------------------------------------------ Mobile Number                     
+					if (mobileNumber.compareTo("") != 0 || mobileNumber != null) {
+						ops.add(ContentProviderOperation
+								.newInsert(ContactsContract.Data.CONTENT_URI)
+								.withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+								.withValue(ContactsContract.Data.MIMETYPE,
+										ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE)
+								.withValue(ContactsContract.CommonDataKinds.Phone.NUMBER, mobileNumber)
+								.withValue(ContactsContract.CommonDataKinds.Phone.TYPE,
+										ContactsContract.CommonDataKinds.Phone.TYPE_MOBILE).build());
+					}
+
+					//------------------------------------------------------ Home Numbers
+					if (homeNumber.compareTo("") != 0 || homeNumber != null) {
+						ops.add(ContentProviderOperation
+								.newInsert(ContactsContract.Data.CONTENT_URI)
+								.withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+								.withValue(ContactsContract.Data.MIMETYPE,
+										ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE)
+								.withValue(ContactsContract.CommonDataKinds.Phone.NUMBER, homeNumber)
+								.withValue(ContactsContract.CommonDataKinds.Phone.TYPE,
+										ContactsContract.CommonDataKinds.Phone.TYPE_HOME).build());
+					}
+
+					//------------------------------------------------------ Work Numbers
+					if (workNumber.compareTo("") != 0 || workNumber != null) {
+						ops.add(ContentProviderOperation
+								.newInsert(ContactsContract.Data.CONTENT_URI)
+								.withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+								.withValue(ContactsContract.Data.MIMETYPE,
+										ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE)
+								.withValue(ContactsContract.CommonDataKinds.Phone.NUMBER, workNumber)
+								.withValue(ContactsContract.CommonDataKinds.Phone.TYPE,
+										ContactsContract.CommonDataKinds.Phone.TYPE_WORK).build());
+					}
+
+					// Asking the Contact provider to create a new contact                 
+					try {
+						getContentResolver().applyBatch(ContactsContract.AUTHORITY, ops);
+					} catch (Exception e) {
+						e.printStackTrace();
+						Toast.makeText(MainActivity.this, "Exception: " + e.getMessage(), Toast.LENGTH_SHORT)
+								.show();
+					}
+				}
+
+				reader.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			return 0;
+		}
+	}
+
+	private class BackupContactsTask extends AsyncTask<String, Integer, Integer> {
+		private int contactsLength = 0;
+
+		@Override
+		protected void onCancelled() {
+			// Forced Cancel, 여기로 오면 설계상 문제 있는것임....
+			Toast.makeText(MainActivity.this, "주소록 백업에 실패하였습니다.", Toast.LENGTH_SHORT).show();
+			backupDialog.dismiss();
+			super.onCancelled();
+		}
+
+		@Override
+		protected void onPostExecute(Integer result) {
+			Toast.makeText(MainActivity.this, "주소록 백업이 성공적으로 처리되었습니다.", Toast.LENGTH_SHORT).show();
+			Toast.makeText(MainActivity.this, "sdcard/lostfount/output.csv에 저장되었습니다.", Toast.LENGTH_SHORT)
+					.show();
+			backupDialog.dismiss();
+		}
+
+		@Override
+		protected void onPreExecute() {
+			// Dialog Popup
+			backupDialog = new ProgressDialog(MainActivity.this);
+			backupDialog.setTitle("주소록 복원 중");
+			backupDialog.setMessage("잠시만 기다려 주세요...");
+			backupDialog.setCancelable(false);
+			backupDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+			backupDialog.setMax(0);
+			backupDialog.show();
+		}
+
+		protected void onProgressUpdate(Integer... values) {
+			backupDialog.setProgress(values[0]);
+			backupDialog.setMax(values[1]);
+		}
+
+		@Override
+		protected Integer doInBackground(String... params) {
+			int contactsLength = 0;
+			int iterator = 0;
+			List<String[]> contactsList = new ArrayList<String[]>();
 			ContentResolver cr = getContentResolver();
 
 			Cursor cursor = cr.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
@@ -81,10 +307,13 @@ public class MainActivity extends Activity implements OnClickListener {
 			Log.e("ididx", String.valueOf(ididx));
 			Log.e("nameidx", String.valueOf(nameidx));
 
-			StringBuilder result = new StringBuilder();
-
 			cursor.moveToFirst();
+			contactsLength = cursor.getCount();
+
 			while (cursor.moveToNext()) {
+				iterator++;
+				publishProgress(iterator, contactsLength);
+
 				String name = "";
 				String mobile = "";
 				String home = "";
@@ -120,167 +349,19 @@ public class MainActivity extends Activity implements OnClickListener {
 				String[] contactString = { name, mobile, home, work };
 				contactsList.add(contactString);
 			}
-			//txt_result.setText(result);
 
-			writeData(contactsList);
-			break;
+			String sdcard_path = Environment.getExternalStorageDirectory().getAbsolutePath();
+			String csv = sdcard_path + "/lostfound/output.csv";
 
-		case R.id.btn_backup2:
-			Intent intent = new Intent(getBaseContext(), FileDialog.class);
-			intent.putExtra(FileDialog.START_PATH, Environment.getExternalStorageDirectory().getPath());
-
-			intent.putExtra(FileDialog.CAN_SELECT_DIR, true);
-
-			intent.putExtra(FileDialog.SELECTION_MODE, SelectionMode.MODE_OPEN);
-
-			intent.putExtra(FileDialog.FORMAT_FILTER, new String[] { "csv" });
-
-			startActivityForResult(intent, REQUEST_SAVE);
-			break;
-
-		case R.id.btn_restore:
-
-			/*
-			String DisplayName = "XYZ";
-			String MobileNumber = "123456";
-			String HomeNumber = "1111";
-			String WorkNumber = "2222";
-
-			ArrayList<ContentProviderOperation> ops = new ArrayList<ContentProviderOperation>();
-
-			ops.add(ContentProviderOperation.newInsert(ContactsContract.RawContacts.CONTENT_URI)
-					.withValue(ContactsContract.RawContacts.ACCOUNT_TYPE, null)
-					.withValue(ContactsContract.RawContacts.ACCOUNT_NAME, null).build());
-
-			//------------------------------------------------------ Names
-			if (DisplayName != null) {
-				ops.add(ContentProviderOperation
-						.newInsert(ContactsContract.Data.CONTENT_URI)
-						.withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
-						.withValue(ContactsContract.Data.MIMETYPE,
-								ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE)
-						.withValue(ContactsContract.CommonDataKinds.StructuredName.DISPLAY_NAME, DisplayName)
-						.build());
-			}
-
-			//------------------------------------------------------ Mobile Number                     
-			if (MobileNumber != null) {
-				ops.add(ContentProviderOperation
-						.newInsert(ContactsContract.Data.CONTENT_URI)
-						.withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
-						.withValue(ContactsContract.Data.MIMETYPE,
-								ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE)
-						.withValue(ContactsContract.CommonDataKinds.Phone.NUMBER, MobileNumber)
-						.withValue(ContactsContract.CommonDataKinds.Phone.TYPE,
-								ContactsContract.CommonDataKinds.Phone.TYPE_MOBILE).build());
-			}
-
-			//------------------------------------------------------ Home Numbers
-			if (HomeNumber != null) {
-				ops.add(ContentProviderOperation
-						.newInsert(ContactsContract.Data.CONTENT_URI)
-						.withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
-						.withValue(ContactsContract.Data.MIMETYPE,
-								ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE)
-						.withValue(ContactsContract.CommonDataKinds.Phone.NUMBER, HomeNumber)
-						.withValue(ContactsContract.CommonDataKinds.Phone.TYPE,
-								ContactsContract.CommonDataKinds.Phone.TYPE_HOME).build());
-			}
-
-			//------------------------------------------------------ Work Numbers
-			if (WorkNumber != null) {
-				ops.add(ContentProviderOperation
-						.newInsert(ContactsContract.Data.CONTENT_URI)
-						.withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
-						.withValue(ContactsContract.Data.MIMETYPE,
-								ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE)
-						.withValue(ContactsContract.CommonDataKinds.Phone.NUMBER, WorkNumber)
-						.withValue(ContactsContract.CommonDataKinds.Phone.TYPE,
-								ContactsContract.CommonDataKinds.Phone.TYPE_WORK).build());
-			}
-
-			// Asking the Contact provider to create a new contact                 
+			CSVWriter writer;
 			try {
-				getContentResolver().applyBatch(ContactsContract.AUTHORITY, ops);
-			} catch (Exception e) {
+				writer = new CSVWriter(new FileWriter(csv));
+				writer.writeAll(contactsList);
+				writer.close();
+			} catch (IOException e) {
 				e.printStackTrace();
-				Toast.makeText(MainActivity.this, "Exception: " + e.getMessage(), Toast.LENGTH_SHORT).show();
 			}
-			*/
-			break;
+			return 0;
 		}
 	}
-
-	public synchronized void onActivityResult(final int requestCode, int resultCode, final Intent data) {
-
-		if (resultCode == Activity.RESULT_OK) {
-
-			if (requestCode == REQUEST_SAVE) {
-				System.out.println("Saving...");
-			} else if (requestCode == REQUEST_LOAD) {
-				System.out.println("Loading...");
-			}
-
-			selectedFilePath = data.getStringExtra(FileDialog.RESULT_PATH);
-			Toast.makeText(MainActivity.this, selectedFilePath, Toast.LENGTH_SHORT).show();
-			if (selectedFilePath.endsWith("csv")) {
-				Toast.makeText(MainActivity.this, "csv selected", Toast.LENGTH_SHORT).show();
-				readData(selectedFilePath);
-			} else {
-				Toast.makeText(MainActivity.this, "Folder selected discard", Toast.LENGTH_SHORT).show();
-			}
-
-		} else if (resultCode == Activity.RESULT_CANCELED) {
-			Toast.makeText(MainActivity.this, "File Not Selected", Toast.LENGTH_SHORT).show();
-		}
-
-	}
-
-	public void writeData(List<String[]> contactsList) {
-		String sdcard_path = Environment.getExternalStorageDirectory().getAbsolutePath();
-		String csv = sdcard_path + "/lostfound/output.csv";
-		CSVWriter writer;
-		try {
-			writer = new CSVWriter(new FileWriter(csv));
-			writer.writeAll(contactsList);
-			writer.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void readData(String path) {
-		try {
-			CSVReader reader = new CSVReader(new FileReader(path));
-
-			String[] row;
-
-			List<?> content = reader.readAll();
-			StringBuilder result = new StringBuilder();
-
-			for (Object object : content) {
-				row = (String[]) object;
-
-				for (int i = 0; i < row.length; i++) {
-					// display CSV values
-					result.append("Cell column index: " + i + "\n");
-					if(row[i].compareTo("") == 0){
-						result.append("empty string" + "\n");
-					}else{
-						result.append(row[i] + "\n");
-					}
-						
-					result.append("-------------" + "\n");
-				}
-			}
-			reader.close();
-			
-			txt_result.setText(result);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
 }

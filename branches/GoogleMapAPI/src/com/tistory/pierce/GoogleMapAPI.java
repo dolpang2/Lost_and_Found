@@ -147,7 +147,7 @@ public class GoogleMapAPI extends FragmentActivity implements LocationListener {
          * Sms 보내는 부분
          */
         SmsManager sms = SmsManager.getDefault();
-        sms.sendTextMessage("010-8266-8969", null, mSmsUrl, null, null);
+        sms.sendTextMessage("+82-" + "10-8266-8969", null, mSmsUrl, null, null);
         
         Toast.makeText(GoogleMapAPI.this, "위도  : " + lat +  " 경도: "  + lng ,  Toast.LENGTH_SHORT).show();
     }

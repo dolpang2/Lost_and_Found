@@ -95,6 +95,11 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity android:name="com.lamerman.FileDialog"></activity>
+        <service android:name="ServiceExample">
+            <intent-filter>
+                <action android:name="kr.lee.lostfound.ServiceExample"></action>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

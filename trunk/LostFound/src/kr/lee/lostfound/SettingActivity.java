@@ -76,7 +76,9 @@ public class SettingActivity extends Activity implements OnClickListener {
 			startActivity(setWarningIntent);
 			break;
 		case R.id.setLockMessage:
-			Toast.makeText(SettingActivity.this, "구현중입니다...", Toast.LENGTH_SHORT).show();
+			// Test!
+			Intent setContactsIntent = new Intent(SettingActivity.this, ContactsActivity.class);
+			startActivity(setContactsIntent);
 			break;
 		case R.id.setSaveSetting:
 			ContentValues updateData = new ContentValues();

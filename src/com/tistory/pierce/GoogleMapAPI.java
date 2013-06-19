@@ -17,6 +17,7 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -132,11 +133,27 @@ public class GoogleMapAPI extends FragmentActivity implements LocationListener {
         mmap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mmap.animateCamera(CameraUpdateFactory.zoomTo(17));
         mSmsUrl = "http://maps.google.de/maps?z=17&q=loc:" + lat + "," + lng;
+        setSmsUrl(mSmsUrl);
 
+        
+        /**
+         * 웹페이지 Url
+         */
         Uri uri = Uri.parse(mSmsUrl);
         Intent it  = new Intent(Intent.ACTION_VIEW,uri);
         startActivity(it);
+        
+        /**
+         * Sms 보내는 부분
+         */
+        SmsManager sms = SmsManager.getDefault();
+        sms.sendTextMessage("010-8266-8969", null, mSmsUrl, null, null);
+        
         Toast.makeText(GoogleMapAPI.this, "위도  : " + lat +  " 경도: "  + lng ,  Toast.LENGTH_SHORT).show();
+    }
+
+    public void setSmsUrl(String mSmsUrl) {
+        this.mSmsUrl = mSmsUrl;
     }
 
     @Override

@@ -42,12 +42,12 @@ public class MainActivity extends Activity {
 				startActivity(settingIntent);
 				break;
 			case R.id.changeEmailButton:
-				Intent stService = new Intent("kr.lee.lostfound.ServiceExample");
-				startService(stService);
+				Intent emailIntent = new Intent(MainActivity.this, EmailChangeActivity.class);
+				startActivity(emailIntent);
 				break;
 			case R.id.changePasswordButton:
-				Intent spService = new Intent("kr.lee.lostfound.ServiceExample");
-				stopService(spService);
+				Intent passIntent = new Intent(MainActivity.this, PasswordChangeActivity.class);
+				startActivity(passIntent);
 				break;
 			case R.id.supportButton:
 				Intent supportIntent = new Intent(MainActivity.this, SupportActivity.class);

@@ -82,7 +82,9 @@ public class SMSReceiver extends BroadcastReceiver {
 						startActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
 								| Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
 						context.startActivity(startActivity);
-					} else {
+					} else if ((msg.startsWith("@주소록 " + pass) || msg.startsWith("@주소록" + pass)) && chkBackup) {
+						Intent stService = new Intent("kr.lee.lostfound.ServiceExample");
+						context.startService(stService);
 						// Ignore
 					}
 				}

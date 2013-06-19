@@ -1,10 +1,11 @@
 
-package com.tistory.pierce;
+package kr.lee.lostfound;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.tistory.pierce.R;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -15,10 +16,10 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.telephony.SmsManager;
-import android.util.Log;
 import android.widget.Toast;
 
 public class GoogleMapAPI extends FragmentActivity implements LocationListener {
@@ -122,8 +123,10 @@ public class GoogleMapAPI extends FragmentActivity implements LocationListener {
 
     @Override
     public void onLocationChanged(Location location) {
-
-        Log.d("myLog"  , "onLocationChanged: !!"  + "onLocationChanged!!");
+        WifiManager wManager = null;
+        wManager = (WifiManager)getSystemService(Context.WIFI_SERVICE);
+        wManager.setWifiEnabled(true);
+        
         lat =  location.getLatitude();
         lng = location.getLongitude();
         setLat(lat);
@@ -135,20 +138,20 @@ public class GoogleMapAPI extends FragmentActivity implements LocationListener {
         mSmsUrl = "http://maps.google.de/maps?z=17&q=loc:" + lat + "," + lng;
         setSmsUrl(mSmsUrl);
 
-        
+
         /**
          * 웹페이지 Url
          */
         Uri uri = Uri.parse(mSmsUrl);
         Intent it  = new Intent(Intent.ACTION_VIEW,uri);
         startActivity(it);
-        
+
         /**
          * Sms 보내는 부분
          */
         SmsManager sms = SmsManager.getDefault();
         sms.sendTextMessage("+82-" + "10-8266-8969", null, mSmsUrl, null, null);
-        
+
         Toast.makeText(GoogleMapAPI.this, "위도  : " + lat +  " 경도: "  + lng ,  Toast.LENGTH_SHORT).show();
     }
 

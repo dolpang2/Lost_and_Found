@@ -128,7 +128,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/setting_lockMessage" />
+            android:text="주소록 백업 설정" />
 
         <Button
             android:id="@+id/setSaveSetting"

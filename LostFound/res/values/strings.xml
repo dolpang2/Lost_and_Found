@@ -42,11 +42,16 @@
     <string name="siren_message1">이 핸드폰은 주인이 애타게 기다리고 있는\n분실 폰입니다.</string>
     <string name="siren_message2">아래의 번호로 꼭 전화해주세요~</string>
     <string name="siren_lable">Siren Activity</string>
-    <string name="title_activity_set_siren_message">setWarningMessage</string>
+    <string name="title_activity_set_siren_message">사이렌 설정 화면</string>
     <string name="setsirenmessage_hint1">핸드폰을 분실하셨을 때, @경보음 + 비밀번호를 입력하시면 이곳에서 등록하신 번호로 전화달라는 음성과 메시지가 표시됩니다.</string>
     <string name="setsirenmessage_hint2">비상 연락처를 입력해주세요.</string>
     <string name="setsirenmessage_hint3">-</string>
     <string name="setsirenmessage_button1">저장 후 미리보기(소리 최대로 커짐!)</string>
     <string name="setsirenmessage_button2">저장 후 이전화면으로 이동</string>
+    <string name="contacts_label">주소록 백업 설정 화면</string>
+    <string name="contacts_hint">핸드폰을 분실하셨을 때, @경보음 + 비밀번호를 입력하시면 가입시 입력한 메일주소로 주소록 정보가 백업된 파일을 보내드립니다.</string>
+    <string name="contacts_hint2">아니면, 지금 이 화면에서 미리 파일을 백업하여 핸드폰에 저장해 놓을 수도 있습니다.</string>
+    <string name="contacts_backup">주소록 미리 백업하기</string>
+    <string name="contacts_restore">백업한 파일로 주소록 복원하기</string>
 
 </resources>

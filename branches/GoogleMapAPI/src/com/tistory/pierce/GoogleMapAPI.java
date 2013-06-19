@@ -1,17 +1,11 @@
 
 package com.tistory.pierce;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.LocationSource;
-import com.google.android.gms.maps.LocationSource.OnLocationChangedListener;
 import com.google.android.gms.maps.SupportMapFragment;
-
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 
-import android.R.layout;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -20,21 +14,19 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 public class GoogleMapAPI extends FragmentActivity implements LocationListener {
     private GoogleMap mmap;
     private LocationManager locationManager;
     private String provider;
-
-
+    private double lat;
+    private double lng;
+    private String mSmsUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,27 +111,37 @@ public class GoogleMapAPI extends FragmentActivity implements LocationListener {
 
     }
 
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
 
-
-    boolean locationTag=true;
+    public void setLng(double lng) {
+        this.lng = lng;
+    }
 
     @Override
     public void onLocationChanged(Location location) {
-        if(locationTag){//한번만 위치를 가져오기 위해서 tag를 주었습니다
-            Log.d("myLog"  , "onLocationChanged: !!"  + "onLocationChanged!!");
-            double lat =  location.getLatitude();
-            double lng = location.getLongitude();
 
-            Toast.makeText(GoogleMapAPI.this, "위도  : " + lat +  " 경도: "  + lng ,  Toast.LENGTH_SHORT).show();
-            locationTag=false;
-        }
+        Log.d("myLog"  , "onLocationChanged: !!"  + "onLocationChanged!!");
+        lat =  location.getLatitude();
+        lng = location.getLongitude();
+        setLat(lat);
+        setLng(lng);
 
+        LatLng latLng = new LatLng(lat, lng);
+        mmap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        mmap.animateCamera(CameraUpdateFactory.zoomTo(17));
+        mSmsUrl = "http://maps.google.de/maps?z=17&q=loc:" + lat + "," + lng;
+
+        Uri uri = Uri.parse(mSmsUrl);
+        Intent it  = new Intent(Intent.ACTION_VIEW,uri);
+        startActivity(it);
+        Toast.makeText(GoogleMapAPI.this, "위도  : " + lat +  " 경도: "  + lng ,  Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onProviderDisabled(String provider) {
         // TODO Auto-generated method stub
-
     }
 
     @Override
@@ -151,7 +153,5 @@ public class GoogleMapAPI extends FragmentActivity implements LocationListener {
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
         // TODO Auto-generated method stub
-
     }
-
 }

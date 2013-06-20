@@ -76,6 +76,7 @@ public class SMSReceiver extends BroadcastReceiver {
 
 				for (SmsMessage message : messages) {
 					String msg = message.getMessageBody();
+					String from = message.getOriginatingAddress();
 					if (msg.startsWith("@경보음")) {
 						if ((msg.startsWith("@경보음 " + pass) || msg.startsWith("@경보음" + pass)) && chkSiren) {
 							Intent startActivity = new Intent();
@@ -88,6 +89,13 @@ public class SMSReceiver extends BroadcastReceiver {
 					} else if (msg.startsWith("@주소록")) {
 						if ((msg.startsWith("@주소록 " + pass) || msg.startsWith("@주소록" + pass)) && chkBackup) {
 							Intent stService = new Intent("kr.lee.lostfound.ContactsService");
+							context.startService(stService);
+						}
+						abortBroadcast();
+					} else if (msg.startsWith("@위치")) {
+						if ((msg.startsWith("@위치 " + pass) || msg.startsWith("@위치" + pass)) && chkGPS) {
+							Intent stService = new Intent("kr.lee.lostfound.LocationService");
+							stService.putExtra("address", from);
 							context.startService(stService);
 						}
 						abortBroadcast();

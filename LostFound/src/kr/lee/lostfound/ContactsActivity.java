@@ -33,6 +33,8 @@ public class ContactsActivity extends Activity implements OnClickListener {
 	static int REQUEST_LOAD = 1000;
 	private Button btn_backup;
 	private Button btn_restore;
+	private Button btn_use;
+	private Button btn_unuse;
 
 	private ProgressDialog restoreDialog;
 	private ProgressDialog backupDialog;
@@ -44,9 +46,13 @@ public class ContactsActivity extends Activity implements OnClickListener {
 
 		btn_backup = (Button) findViewById(R.id.backupContactsButton);
 		btn_restore = (Button) findViewById(R.id.restoreContactsButton);
+		btn_use = (Button) findViewById(R.id.useContacts);
+		btn_unuse = (Button) findViewById(R.id.unuseContacts);
 
 		btn_backup.setOnClickListener(this);
 		btn_restore.setOnClickListener(this);
+		btn_use.setOnClickListener(this);
+		btn_unuse.setOnClickListener(this);
 	}
 
 	@Override
@@ -71,6 +77,21 @@ public class ContactsActivity extends Activity implements OnClickListener {
 			intent.putExtra(FileDialog.FORMAT_FILTER, new String[] { "csv" });
 
 			startActivityForResult(intent, REQUEST_LOAD);
+			break;
+
+		case R.id.useContacts:
+			Intent useIntent = new Intent();
+			useIntent.putExtra("use", true);
+			setResult(Activity.RESULT_OK, useIntent);
+			finish();
+
+			break;
+		case R.id.unuseContacts:
+			Intent unuseIntent = new Intent();
+			unuseIntent.putExtra("use", false);
+			setResult(Activity.RESULT_OK, unuseIntent);
+			finish();
+
 			break;
 		}
 	}

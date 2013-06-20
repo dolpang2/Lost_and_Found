@@ -24,8 +24,9 @@
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="ko.frost.spycamera.TakePicture"
-            android:label="@string/app_name" >
+            android:name="ko.frost.spycamera.SpyCameraActivity"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.Transparent" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

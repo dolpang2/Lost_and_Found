@@ -11,7 +11,8 @@ import android.widget.EditText;
 
 public class SetSirenMessageActivity extends Activity implements OnClickListener {
 	private Button previewButton;
-	private Button confirmButton;
+	private Button useButton;
+	private Button unuseButton;
 	private EditText numOfPhone1;
 	private EditText numOfPhone2;
 	private EditText numOfPhone3;
@@ -23,15 +24,17 @@ public class SetSirenMessageActivity extends Activity implements OnClickListener
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_setsirenmessage);
 
-		previewButton = (Button) findViewById(R.id.setSirenButton1);
-		confirmButton = (Button) findViewById(R.id.setSirenButton2);
+		previewButton = (Button) findViewById(R.id.sirenPrevButton);
+		useButton = (Button) findViewById(R.id.sirenUse);
+		unuseButton = (Button) findViewById(R.id.sirenUnuse);
 
 		numOfPhone1 = (EditText) findViewById(R.id.numOfPhone1);
 		numOfPhone2 = (EditText) findViewById(R.id.numOfPhone2);
 		numOfPhone3 = (EditText) findViewById(R.id.numOfPhone3);
 
 		previewButton.setOnClickListener(this);
-		confirmButton.setOnClickListener(this);
+		useButton.setOnClickListener(this);
+		unuseButton.setOnClickListener(this);
 	}
 
 	@Override
@@ -45,13 +48,25 @@ public class SetSirenMessageActivity extends Activity implements OnClickListener
 	public void onClick(View v) {
 		int id = v.getId();
 		switch (id) {
-		case R.id.setSirenButton1:
+		case R.id.sirenPrevButton:
 			updateSirenMessage();
 			Intent previewIntent = new Intent(SetSirenMessageActivity.this, SirenActivity.class);
 			startActivity(previewIntent);
 			break;
-		case R.id.setSirenButton2:
+
+		case R.id.sirenUse:
 			updateSirenMessage();
+			Intent useIntent = new Intent();
+			useIntent.putExtra("use", true);
+			setResult(Activity.RESULT_OK, useIntent);
+			finish();
+			break;
+
+		case R.id.sirenUnuse:
+			updateSirenMessage();
+			Intent unuseIntent = new Intent();
+			unuseIntent.putExtra("use", false);
+			setResult(Activity.RESULT_OK, unuseIntent);
 			finish();
 			break;
 		}

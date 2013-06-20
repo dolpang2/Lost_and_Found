@@ -13,7 +13,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dip"
-        android:layout_weight="1"
+        android:layout_weight="1.5"
         android:orientation="vertical" >
 
         <TextView
@@ -34,6 +34,7 @@
             android:layout_height="wrap_content"
             android:text="@string/contacts_hint2"
             android:textAppearance="?android:attr/textAppearanceMedium" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -52,6 +53,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/contacts_restore" />
+
+        <Button
+            android:id="@+id/useContacts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/contacts_using" />
+
+        <Button
+            android:id="@+id/unuseContacts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/contacts_unusing" />
+
     </LinearLayout>
 
 </LinearLayout>

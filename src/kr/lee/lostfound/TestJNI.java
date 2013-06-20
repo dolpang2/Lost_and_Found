@@ -8,6 +8,9 @@ import android.widget.TextView;
 import java.io.UnsupportedEncodingException;
 
 public class TestJNI extends Activity {
+    private String mSms;
+    private String mPassword;
+    private int mResultValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,19 +20,25 @@ public class TestJNI extends Activity {
         nativeJava nj = new nativeJava();
 
         TextView tv = (TextView)findViewById(R.id.textView);
-        int i = -1;
-        String str;
+        mResultValue = -1;
+        mSms = "@위치 1234";
+        mPassword = "1234";
         
+        /**
+         * Compare Sms code & local DB Password
+         */
         try {
-            i = nj.resultCompareString("@위치1234".getBytes("KSC5601"),
-                    "1234".getBytes("KSC5601"));
+            mResultValue = nj.resultCompareString(mSms.getBytes("KSC5601"), 
+                    mPassword.getBytes("KSC5601"));
         } catch (UnsupportedEncodingException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        str = Integer.toString(i);
-
-        tv.setText(str);
+        
+        /**
+         * if printed value = -1, Error
+         * else if printed value = 0, password does not match sms code
+         * else if printed value = 1, password matches sms code
+         */
+        tv.setText("" + mResultValue);
     }
-
 }

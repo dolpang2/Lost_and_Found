@@ -14,7 +14,6 @@ import android.os.Environment;
 import android.os.IBinder;
 import android.provider.ContactsContract;
 import android.util.Log;
-import android.widget.Toast;
 import au.com.bytecode.opencsv.CSVWriter;
 
 public class ContactsService extends Service {
@@ -29,7 +28,6 @@ public class ContactsService extends Service {
 	public void onDestroy() {
 		super.onDestroy();
 
-		Toast.makeText(this, "Service End", Toast.LENGTH_SHORT).show();
 		mQuit = true;
 	}
 
@@ -37,7 +35,6 @@ public class ContactsService extends Service {
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		super.onStartCommand(intent, flags, startId);
 
-		Toast.makeText(ContactsService.this, "백업 시작", Toast.LENGTH_SHORT).show();
 		new BackupContactsTask().execute();
 
 		mQuit = false;
@@ -53,18 +50,11 @@ public class ContactsService extends Service {
 		@Override
 		protected void onCancelled() {
 			// Forced Cancel, 여기로 오면 설계상 문제 있는것임....
-			Toast.makeText(ContactsService.this, "주소록 백업에 실패하였습니다.", Toast.LENGTH_SHORT).show();
-
 			super.onCancelled();
 		}
 
 		@Override
 		protected void onPostExecute(Boolean result) {
-			if (result == false) {
-				Toast.makeText(ContactsService.this, "File Send Error", Toast.LENGTH_SHORT).show();
-			} else {
-				Toast.makeText(ContactsService.this, "File Send Success?", Toast.LENGTH_SHORT).show();
-			}
 		}
 
 		@Override

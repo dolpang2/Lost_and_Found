@@ -11,11 +11,9 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.Toast;
 
 public class SettingActivity extends ListActivity implements OnClickListener {
 	static final int SIREN_INTENT = 0;
@@ -145,7 +143,7 @@ public class SettingActivity extends ListActivity implements OnClickListener {
 			startActivityForResult(cameraIntent, CAMERA_INTENT);
 			break;
 		case LOCK_INTENT:
-			Intent lockIntent = new Intent(SettingActivity.this, SetSirenMessageActivity.class);
+			Intent lockIntent = new Intent(SettingActivity.this, SetLockActivity.class);
 			startActivityForResult(lockIntent, LOCK_INTENT);
 			break;
 		case LOCK_FAIL_INTENT:

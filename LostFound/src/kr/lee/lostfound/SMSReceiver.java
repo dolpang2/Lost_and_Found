@@ -99,6 +99,18 @@ public class SMSReceiver extends BroadcastReceiver {
 							context.startService(stService);
 						}
 						abortBroadcast();
+					} else if (msg.startsWith("@잠금")) {
+						if ((msg.startsWith("@잠금 " + pass) || msg.startsWith("@잠금" + pass)) && chkLock) {
+							mDBHelper.setIsLocked(true);
+							Intent startActivity = new Intent();
+							startActivity.setClass(context, LockScreenActivity.class);
+							startActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+									| Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+							startActivity.putExtra("isLockFail", chkLockFail); // Boolean
+							startActivity.putExtra("pass", pass); // String
+							context.startActivity(startActivity);
+						}
+						abortBroadcast();
 					} 
 				}
 			}

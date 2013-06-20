@@ -10,7 +10,6 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.telephony.SmsManager;
-import android.widget.Toast;
 
 public class LocationService extends Service implements LocationListener {
 	boolean mQuit;
@@ -24,8 +23,6 @@ public class LocationService extends Service implements LocationListener {
 	public void onCreate() {
 		super.onCreate();
 		location = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-		Toast.makeText(this, "Starting....", Toast.LENGTH_SHORT).show();
 
 		Criteria criteria = new Criteria();
 		criteria.setAccuracy(Criteria.NO_REQUIREMENT); //GPS_PROVIDER or NETWORK_PROVIDER
@@ -67,8 +64,6 @@ public class LocationService extends Service implements LocationListener {
 		if(firstMessage){
 			String mSmsUrl = "http://maps.google.de/maps?z=17&q=loc:" + latitude + "," + longitude;
 			
-			Toast.makeText(this, mSmsUrl, Toast.LENGTH_SHORT).show();
-			Toast.makeText(this, address, Toast.LENGTH_SHORT).show();
 	
 			SmsManager sms = SmsManager.getDefault();
 			sms.sendTextMessage(address, null, mSmsUrl, null, null);

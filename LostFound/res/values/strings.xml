@@ -73,5 +73,15 @@
     <string name="setlock_hint2">화면 잠금 상태에서 비밀번호를 입력하시면 잠금이 헤제됩니다.</string>
     <string name="setlock_using">화면 잠금기능 사용</string>
     <string name="setlock_unusing">화면 잠금기능 사용안함</string>
+    <string name="title_activity_set_lock_fail">화면잠금 실패 설정</string>
+    <string name="setlockfail_hint">핸드폰을 분실하여, 화면 잠금 기능으로 화면을 잠구었을 때, 상대방이 비밀번호를 무심결에 잘못 입력 한 경우, 전면 카메라로 사진을 찍어 메일로 보내드립니다.</string>
+    <string name="setlockfail_hint2">핸드폰도 찾고, 도둑도 잡고 :)</string>
+    <string name="setlockfail_using">잠금 해제 실패시 전면촬영 사용</string>
+    <string name="setlockfail_unusing">잠금 해제 실패시 전면촬영 사용안함</string>
+    <string name="title_activity_set_camera">카메라 환경설정</string>
+        <string name="camera_hint">핸드폰을 분실하셨을 때, @사진 + 비밀번호를 보내주시면, 전면 카메라로 사진을 찍어 메일로 보내드립니다.</string>
+    <string name="camera_hint2">주위 환경으로 찾을 수도 있고, 범인을 찾을수도 있겠죠?</string>
+    <string name="camera_using">전면촬영 사용</string>
+    <string name="camera_unusing">전면촬영 사용안함</string>
 
 </resources>

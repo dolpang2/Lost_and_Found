@@ -4,6 +4,14 @@
     <color name="pitch_black">#202020</color>
     <color name="pitch_yellow">#FFD700</color>
 
-    <style name="Theme.MyTheme" parent="@android:style/Theme">
+    <style name="Theme.MyTheme" parent="@android:style/Theme"></style>
+
+    <style name="Theme.Transparent" parent="android:Theme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
     </style>
+
 </resources>

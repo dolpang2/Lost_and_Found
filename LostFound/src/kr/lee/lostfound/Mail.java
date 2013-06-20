@@ -19,6 +19,9 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import android.util.Log;
+import android.widget.Toast;
+
 public class Mail extends javax.mail.Authenticator {
 	private String user;
 	private String password;
@@ -127,6 +130,7 @@ public class Mail extends javax.mail.Authenticator {
 
 		if (!user.equals("") && !password.equals("") && to.length > 0 && !from.equals("")
 				&& !subject.equals("") && !body.equals("")) {
+			Log.e("mail", user + password + to.length + from + subject + body);
 			Session session = Session.getInstance(props, this);
 
 			MimeMessage msg = new MimeMessage(session);

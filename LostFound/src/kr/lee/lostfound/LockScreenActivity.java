@@ -75,7 +75,11 @@ public class LockScreenActivity extends Activity {
 						mDBHelper.setIsLocked(false);
 						LockScreenActivity.this.finish();
 					} else {
-						Toast.makeText(LockScreenActivity.this, "Wrong Password", Toast.LENGTH_SHORT).show();
+						if(isLockFail){
+							Intent spyCameraIntent = new Intent(LockScreenActivity.this, SpyCameraActivity.class);
+							startActivity(spyCameraIntent);
+						}
+						Toast.makeText(LockScreenActivity.this, "비밀번호가 틀렸습니다.", Toast.LENGTH_SHORT).show();
 					}
 				}
 			});

@@ -99,13 +99,13 @@
             android:text="@string/setsirenmessage_button1" />
 
         <Button
-            android:id="@+id/lockUse"
+            android:id="@+id/lockFailUse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/setsirenmessage_using" />
 
         <Button
-            android:id="@+id/lockUnuse"
+            android:id="@+id/lockFailUnuse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/setsirenmessage_unusing" />

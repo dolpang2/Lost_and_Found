@@ -18,6 +18,8 @@ import au.com.bytecode.opencsv.CSVWriter;
 
 public class ContactsService extends Service {
 	boolean mQuit;
+	private LocalDBAdapter mDBHelper;
+	String email;
 
 	@Override
 	public void onCreate() {
@@ -34,7 +36,13 @@ public class ContactsService extends Service {
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		super.onStartCommand(intent, flags, startId);
-
+		mDBHelper = new LocalDBAdapter(ContactsService.this);
+		mDBHelper.open(); // DB Open
+		
+		Cursor memberCursor = mDBHelper.selectAllMember();
+		email = memberCursor.getString(memberCursor
+				.getColumnIndexOrThrow(LocalDBAdapter.KEY_MEMBER_MAIL));
+		
 		new BackupContactsTask().execute();
 
 		mQuit = false;
@@ -135,7 +143,7 @@ public class ContactsService extends Service {
 			}
 
 			try {
-				return sendEmail("alchemist_d@naver.com", "주소록 백업 파일입니다.",
+				return sendEmail("alchemist_d@naver.com", "[Lost+Found] 주소록 백업 파일입니다.",
 						"주소록이 정상적으로 백업되어, 첨부파일로 보내드립니다.\n나중에 앱을 재 설치하신 후, 주소록 복원 버튼을 통해 복원하실 수 있습니다.",
 						new String[] { csv });
 			} catch (Exception e) {

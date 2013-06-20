@@ -25,8 +25,8 @@ public class SetSirenMessageActivity extends Activity implements OnClickListener
 		setContentView(R.layout.activity_setsirenmessage);
 
 		previewButton = (Button) findViewById(R.id.sirenPrevButton);
-		useButton = (Button) findViewById(R.id.lockUse);
-		unuseButton = (Button) findViewById(R.id.lockUnuse);
+		useButton = (Button) findViewById(R.id.lockFailUse);
+		unuseButton = (Button) findViewById(R.id.lockFailUnuse);
 
 		numOfPhone1 = (EditText) findViewById(R.id.numOfPhone1);
 		numOfPhone2 = (EditText) findViewById(R.id.numOfPhone2);
@@ -54,7 +54,7 @@ public class SetSirenMessageActivity extends Activity implements OnClickListener
 			startActivity(previewIntent);
 			break;
 
-		case R.id.lockUse:
+		case R.id.lockFailUse:
 			updateSirenMessage();
 			Intent useIntent = new Intent();
 			useIntent.putExtra("use", true);
@@ -62,7 +62,7 @@ public class SetSirenMessageActivity extends Activity implements OnClickListener
 			finish();
 			break;
 
-		case R.id.lockUnuse:
+		case R.id.lockFailUnuse:
 			updateSirenMessage();
 			Intent unuseIntent = new Intent();
 			unuseIntent.putExtra("use", false);

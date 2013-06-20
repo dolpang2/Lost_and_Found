@@ -139,7 +139,7 @@ public class SettingActivity extends ListActivity implements OnClickListener {
 			startActivityForResult(gpsIntent, GPS_INTENT);
 			break;
 		case CAMERA_INTENT:
-			Intent cameraIntent = new Intent(SettingActivity.this, SetSirenMessageActivity.class);
+			Intent cameraIntent = new Intent(SettingActivity.this, SetCameraActivity.class);
 			startActivityForResult(cameraIntent, CAMERA_INTENT);
 			break;
 		case LOCK_INTENT:
@@ -147,7 +147,7 @@ public class SettingActivity extends ListActivity implements OnClickListener {
 			startActivityForResult(lockIntent, LOCK_INTENT);
 			break;
 		case LOCK_FAIL_INTENT:
-			Intent lockfailIntent = new Intent(SettingActivity.this, SetSirenMessageActivity.class);
+			Intent lockfailIntent = new Intent(SettingActivity.this, SetLockFailActivity.class);
 			startActivityForResult(lockfailIntent, LOCK_FAIL_INTENT);
 			break;
 		case BACKUP_INTENT:

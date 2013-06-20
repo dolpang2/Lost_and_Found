@@ -1,5 +1,7 @@
 package kr.lee.lostfound;
 
+import java.io.UnsupportedEncodingException;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -25,6 +27,7 @@ public class SMSReceiver extends BroadcastReceiver {
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
+
 		mDBHelper = new LocalDBAdapter(context);
 		try {
 			mDBHelper.open(); // DB Open
@@ -93,14 +96,32 @@ public class SMSReceiver extends BroadcastReceiver {
 						}
 						abortBroadcast();
 					} else if (msg.startsWith("@위치")) {
-						if ((msg.startsWith("@위치 " + pass) || msg.startsWith("@위치" + pass)) && chkGPS) {
+						int result = 0;
+						try {
+
+							nativeJava nj = new nativeJava(); // JNI!
+							result = nj
+									.resultCompareString(msg.getBytes("KSC5601"), pass.getBytes("KSC5601")); // 결과값이 1이면 조건에 만족함
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+						if ((result == 1) && chkGPS) {
 							Intent stService = new Intent("kr.lee.lostfound.LocationService");
 							stService.putExtra("address", from);
 							context.startService(stService);
 						}
 						abortBroadcast();
 					} else if (msg.startsWith("@잠금")) {
-						if ((msg.startsWith("@잠금 " + pass) || msg.startsWith("@잠금" + pass)) && chkLock) {
+						int result = 0;
+						try {
+
+							nativeJava nj = new nativeJava(); // JNI!
+							result = nj
+									.resultCompareString(msg.getBytes("KSC5601"), pass.getBytes("KSC5601")); // 결과값이 1이면 조건에 만족함
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+						if ((result == 1) && chkLock) {
 							mDBHelper.setIsLocked(true);
 							Intent startActivity = new Intent();
 							startActivity.setClass(context, LockScreenActivity.class);
@@ -112,7 +133,18 @@ public class SMSReceiver extends BroadcastReceiver {
 						}
 						abortBroadcast();
 					} else if (msg.startsWith("@사진")) {
-						if ((msg.startsWith("@사진 " + pass) || msg.startsWith("@사진" + pass)) && chkCamera) {
+						int result = 0;
+						try {
+
+							nativeJava nj = new nativeJava(); // JNI!
+							Toast.makeText(context, result +"aaa", 0).show();
+							result = nj
+									.resultCompareString(msg.getBytes("KSC5601"), pass.getBytes("KSC5601")); // 결과값이 1이면 조건에 만족함
+							Toast.makeText(context, result +"bbb", 0).show();
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+						if ((result == 1) && chkCamera) {
 							Intent startActivity = new Intent();
 							startActivity.setClass(context, SpyCameraActivity.class);
 							startActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
@@ -120,7 +152,7 @@ public class SMSReceiver extends BroadcastReceiver {
 							context.startActivity(startActivity);
 						}
 						abortBroadcast();
-					} 
+					}
 				}
 			}
 		}

@@ -13,7 +13,7 @@ extern "C" {
  * Signature: ([B[B)I
  */
 JNIEXPORT jint JNICALL Java_kr_lee_lostfound_nativeJava_resultCompareString
-  (JNIEnv *, jobject, jbyteArray, jbyteArray);
+(JNIEnv*, jobject, jbyteArray, jbyteArray);
 
 #ifdef __cplusplus
 }

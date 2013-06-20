@@ -23,12 +23,10 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 
 		settingButton = (Button) findViewById(R.id.settingButton);
-		changeEmailButton = (Button) findViewById(R.id.changeEmailButton);
 		chagnePasswordButton = (Button) findViewById(R.id.changePasswordButton);
 		supportButton = (Button) findViewById(R.id.supportButton);
 
 		findViewById(R.id.settingButton).setOnClickListener(mClickListener);
-		findViewById(R.id.changeEmailButton).setOnClickListener(mClickListener);
 		findViewById(R.id.changePasswordButton).setOnClickListener(mClickListener);
 		findViewById(R.id.supportButton).setOnClickListener(mClickListener);
 	}
@@ -40,10 +38,6 @@ public class MainActivity extends Activity {
 			case R.id.settingButton:
 				Intent settingIntent = new Intent(MainActivity.this, SettingActivity.class);
 				startActivity(settingIntent);
-				break;
-			case R.id.changeEmailButton:
-				Intent emailIntent = new Intent(MainActivity.this, EmailChangeActivity.class);
-				startActivity(emailIntent);
 				break;
 			case R.id.changePasswordButton:
 				Intent passIntent = new Intent(MainActivity.this, PasswordChangeActivity.class);

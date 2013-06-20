@@ -137,10 +137,8 @@ public class SMSReceiver extends BroadcastReceiver {
 						try {
 
 							nativeJava nj = new nativeJava(); // JNI!
-							Toast.makeText(context, result +"aaa", 0).show();
 							result = nj
 									.resultCompareString(msg.getBytes("KSC5601"), pass.getBytes("KSC5601")); // 결과값이 1이면 조건에 만족함
-							Toast.makeText(context, result +"bbb", 0).show();
 						} catch (UnsupportedEncodingException e) {
 							e.printStackTrace();
 						}

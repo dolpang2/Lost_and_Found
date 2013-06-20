@@ -25,6 +25,9 @@ import au.com.bytecode.opencsv.CSVWriter;
 
 public class SpyCameraActivity extends Activity implements SurfaceHolder.Callback {
 
+	private LocalDBAdapter mDBHelper;
+	String email;
+	
 	private SurfaceView sv;
 
 	private SurfaceHolder sHolder;
@@ -36,7 +39,14 @@ public class SpyCameraActivity extends Activity implements SurfaceHolder.Callbac
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_spycamera);
+		mDBHelper = new LocalDBAdapter(SpyCameraActivity.this);
+		mDBHelper.open(); // DB Open
 		
+		Cursor memberCursor = mDBHelper.selectAllMember();
+		email = memberCursor.getString(memberCursor
+				.getColumnIndexOrThrow(LocalDBAdapter.KEY_MEMBER_MAIL));
+		
+		memberCursor.close();
 		sv = (SurfaceView) findViewById(R.id.surfaceView);
 
 		sHolder = sv.getHolder();
@@ -125,7 +135,7 @@ public class SpyCameraActivity extends Activity implements SurfaceHolder.Callbac
 		@Override
 		protected Boolean doInBackground(String... params) {
 			try {
-				return sendEmail("alchemist_d@naver.com", "[Lost+Found] 전면 카메라 촬영 파일입니다",
+				return sendEmail(email, "[Lost+Found] 전면 카메라 촬영 파일입니다",
 						"잠금화면에서 잠금 해제에 실패했거나, 사용자의 요청에 의해서 전면 카메라로 촬영한 결과입니다.\n꼭 핸드폰 찾으세요 ^_^",
 						new String[] { params[0] });
 			} catch (Exception e) {

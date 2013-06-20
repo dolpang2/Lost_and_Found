@@ -64,6 +64,14 @@
     <string name="locationsetting_preview">핸드폰 위치 미리보기</string>
     <string name="locationsetting_using">핸드폰 위치추적 기능 사용</string>
     <string name="locationsetting_unusing">핸드폰 위치추적 기능 사용안함</string>
-    
+    <string name="lockScreen_Message1">이 핸드폰은 주인이 애타게 기다리고 있는\n분실 폰입니다.</string>
+    <string name="lockScreen_Message2">아래의 번호로 꼭 전화해주세요~</string>
+    <string name="settings_password">Enter Password:</string>
+    <string name="lockScreen">화면 잠금</string>
+    <string name="title_activity_set_lock">화면잠금 설정</string>
+    <string name="setlock_hint">핸드폰을 분실하셨을 때, @잠금 + 비밀번호를 보내주시면 핸드폰을 사용하지 못하도록 잠궈버립니다.</string>
+    <string name="setlock_hint2">화면 잠금 상태에서 비밀번호를 입력하시면 잠금이 헤제됩니다.</string>
+    <string name="setlock_using">화면 잠금기능 사용</string>
+    <string name="setlock_unusing">화면 잠금기능 사용안함</string>
 
 </resources>

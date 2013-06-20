@@ -29,12 +29,12 @@
     <uses-permission android:name="android.permission.ACCESS_ASSISTED_GPS" />
     <uses-permission android:name="android.permission.LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
-    <uses-permission android:name="android.permission.UPDATE_DEVICE_STATS" />
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -95,6 +95,14 @@
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
+        <receiver
+            android:name="kr.lee.lostfound.BootcompleteReceiver"
+            android:enabled="true"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
 
         <activity
             android:name="kr.lee.lostfound.SirenActivity"
@@ -129,7 +137,6 @@
                 </action>
             </intent-filter>
         </service>
-        
         <service android:name="kr.lee.lostfound.LocationService" >
             <intent-filter>
                 <action android:name="kr.lee.lostfound.LocationService" >
@@ -143,7 +150,19 @@
 
         <activity
             android:name="kr.lee.lostfound.LocationSettingActivity"
-            android:label="@string/title_activity_location_setting" >
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/title_activity_location_setting"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="kr.lee.lostfound.LockScreenActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/lockScreen"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="kr.lee.lostfound.SetLockActivity"
+            android:label="@string/title_activity_set_lock" >
         </activity>
     </application>
 

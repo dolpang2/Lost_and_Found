@@ -100,7 +100,6 @@ public class ContactsActivity extends Activity implements OnClickListener {
 
 		if (resultCode == Activity.RESULT_OK) {
 			String selectedFilePath = data.getStringExtra(FileDialog.RESULT_PATH);
-			Toast.makeText(ContactsActivity.this, selectedFilePath, Toast.LENGTH_SHORT).show();
 			if (selectedFilePath.endsWith(".csv")) {
 				new RestoreContactsTask().execute(selectedFilePath);
 			} else {

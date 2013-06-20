@@ -19,6 +19,7 @@ public class LocalDBAdapter {
 	public static final String KEY_OPTION_USE_LOCKFAIL = "useLockFail";
 	public static final String KEY_OPTION_USE_BACKUP = "useBackup";
 	public static final String KEY_OPTION_TTS_MESSAGE = "TTSMessage";
+	public static final String KEY_OPTION_IS_LOCKED = "isLocked";
 
 	public static final String DATABASE_NAME = "lostfound";
 	public static final String TABLE_MEMBER_NAME = "member";
@@ -35,9 +36,10 @@ public class LocalDBAdapter {
 			+ " (" + KEY_OPTION_USE_SIREN + " bool not null, " + KEY_OPTION_USE_GPS + " bool not null, "
 			+ KEY_OPTION_USE_CAMERA + " bool not null, " + KEY_OPTION_USE_LOCK + " bool not null, "
 			+ KEY_OPTION_USE_LOCKFAIL + " bool not null, " + KEY_OPTION_USE_BACKUP + " bool not null, "
-			+ KEY_OPTION_TTS_MESSAGE + " text primary key not null);";
+			+ KEY_OPTION_TTS_MESSAGE + " text primary key not null, " + KEY_OPTION_IS_LOCKED
+			+ " bool not null);";
 
-	private static final int DATABASE_VERSION = 2;
+	private static final int DATABASE_VERSION = 3;
 
 	private final Context mCtx;
 
@@ -105,16 +107,17 @@ public class LocalDBAdapter {
 	public void createOption() throws SQLException {
 		ContentValues row = new ContentValues();
 		row.put(KEY_OPTION_USE_SIREN, true);
-		row.put(KEY_OPTION_USE_GPS, false);
-		row.put(KEY_OPTION_USE_CAMERA, false);
-		row.put(KEY_OPTION_USE_LOCK, false);
-		row.put(KEY_OPTION_USE_LOCKFAIL, false);
-		row.put(KEY_OPTION_USE_BACKUP, false);
+		row.put(KEY_OPTION_USE_GPS, true);
+		row.put(KEY_OPTION_USE_CAMERA, true);
+		row.put(KEY_OPTION_USE_LOCK, true);
+		row.put(KEY_OPTION_USE_LOCKFAIL, true);
+		row.put(KEY_OPTION_USE_BACKUP, true);
 		row.put(KEY_OPTION_TTS_MESSAGE, "010-8266-8969");
+		row.put(KEY_OPTION_IS_LOCKED, false);
 
 		mDb.insert(TABLE_OPTION_NAME, null, row);
 	}
-	
+
 	public int deleteOption() throws SQLException {
 		int affectedRow = mDb.delete(TABLE_OPTION_NAME, null, null);
 		return affectedRow;
@@ -145,7 +148,25 @@ public class LocalDBAdapter {
 		cursor = mDb.query(TABLE_OPTION_NAME, new String[] { KEY_OPTION_TTS_MESSAGE }, null, null, null,
 				null, null);
 		cursor.moveToFirst();
-		
+
 		return cursor;
+	}
+
+	public boolean getIsLocked() throws SQLException {
+		Cursor cursor;
+		cursor = mDb.query(TABLE_OPTION_NAME, new String[] { KEY_OPTION_IS_LOCKED }, null, null, null, null,
+				null);
+		cursor.moveToFirst();
+		Boolean result = cursor.getInt(cursor.getColumnIndexOrThrow(LocalDBAdapter.KEY_OPTION_IS_LOCKED)) > 0;
+
+		return result;
+	}
+	
+	public void setIsLocked(Boolean isLocked) throws SQLException {
+		ContentValues row = new ContentValues();
+		row.put(KEY_OPTION_IS_LOCKED, isLocked);
+
+		mDb.update(TABLE_OPTION_NAME, row, null, null);
+		
 	}
 }

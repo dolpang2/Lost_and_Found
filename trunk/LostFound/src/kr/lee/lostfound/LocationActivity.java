@@ -14,12 +14,9 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.telephony.SmsManager;
-import android.widget.Toast;
 
 public class LocationActivity extends FragmentActivity implements LocationListener {
 	private GoogleMap mmap;
@@ -133,8 +130,6 @@ public class LocationActivity extends FragmentActivity implements LocationListen
 		LatLng latLng = new LatLng(lat, lng);
 		mmap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
 		mmap.animateCamera(CameraUpdateFactory.zoomTo(17));
-
-		Toast.makeText(LocationActivity.this, "위도  : " + lat + " 경도: " + lng, Toast.LENGTH_SHORT).show();
 	}
 
 	public void setSmsUrl(String mSmsUrl) {
@@ -143,17 +138,14 @@ public class LocationActivity extends FragmentActivity implements LocationListen
 
 	@Override
 	public void onProviderDisabled(String provider) {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void onProviderEnabled(String provider) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void onStatusChanged(String provider, int status, Bundle extras) {
-		// TODO Auto-generated method stub
 	}
 }

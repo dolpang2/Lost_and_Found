@@ -169,4 +169,11 @@ public class LocalDBAdapter {
 		mDb.update(TABLE_OPTION_NAME, row, null, null);
 		
 	}
+	
+	public void setPassword(String pass) throws SQLException {
+		ContentValues row = new ContentValues();
+		row.put(KEY_MEMBER_PASS, pass);
+
+		mDb.update(TABLE_MEMBER_NAME, row, null, null);
+	}
 }

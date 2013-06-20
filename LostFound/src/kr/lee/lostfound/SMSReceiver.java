@@ -76,20 +76,24 @@ public class SMSReceiver extends BroadcastReceiver {
 
 				for (SmsMessage message : messages) {
 					String msg = message.getMessageBody();
-					if ((msg.startsWith("@경보음 " + pass) || msg.startsWith("@경보음" + pass)) && chkSiren) {
-						Intent startActivity = new Intent();
-						startActivity.setClass(context, SirenActivity.class);
-						startActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-								| Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-						context.startActivity(startActivity);
-					} else if ((msg.startsWith("@주소록 " + pass) || msg.startsWith("@주소록" + pass)) && chkBackup) {
-						Intent stService = new Intent("kr.lee.lostfound.ServiceExample");
-						context.startService(stService);
-						// Ignore
-					}
+					if (msg.startsWith("@경보음")) {
+						if ((msg.startsWith("@경보음 " + pass) || msg.startsWith("@경보음" + pass)) && chkSiren) {
+							Intent startActivity = new Intent();
+							startActivity.setClass(context, SirenActivity.class);
+							startActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+									| Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+							context.startActivity(startActivity);
+						}
+						abortBroadcast();
+					} else if (msg.startsWith("@주소록")) {
+						if ((msg.startsWith("@주소록 " + pass) || msg.startsWith("@주소록" + pass)) && chkBackup) {
+							Intent stService = new Intent("kr.lee.lostfound.ContactsService");
+							context.startService(stService);
+						}
+						abortBroadcast();
+					} 
 				}
 			}
 		}
 	}
-
 }

@@ -130,7 +130,6 @@ public class Mail extends javax.mail.Authenticator {
 
 		if (!user.equals("") && !password.equals("") && to.length > 0 && !from.equals("")
 				&& !subject.equals("") && !body.equals("")) {
-			Log.e("mail", user + password + to.length + from + subject + body);
 			Session session = Session.getInstance(props, this);
 
 			MimeMessage msg = new MimeMessage(session);
